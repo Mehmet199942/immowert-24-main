@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ihr Barangebot ist da!</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            min-width: 100%;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .accent {
+            color: #f59e0b;
+        }
+
+        .content {
+            padding: 40px 30px;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 22px;
+            color: #1e293b;
+        }
+
+        p {
+            margin: 0 0 15px;
+        }
+
+        .offer-box {
+            background-color: #ecfdf5;
+            border: 2px dashed #10b981;
+            padding: 20px;
+            text-align: center;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .offer-amount {
+            font-size: 32px;
+            font-weight: 800;
+            color: #059669;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #10b981;
+            color: #ffffff;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .footer {
+            background-color: #f1f5f9;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .footer a {
+            color: #64748b;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding: 20px 0;">
+                <div class="container">
+                    <div class="header">
+                        <a href="https://yourwebsite.com" class="logo">ImmoWERT<span class="accent">24</span></a>
+                    </div>
+                    <div class="content">
+                        <h1>Gute Nachrichten, *|FNAME|*!</h1>
+
+                        <p>Ihr Barangebot für <strong>*|ADDRESS|*</strong> ist fertig.</p>
+
+                        <div class="offer-box">
+                            <span>Ihr unverbindliches Angebot:</span>
+                            <span class="offer-amount">*|OFFER_AMOUNT|* €</span>
+                            <small>Keine Provisionen. Keine Gebühren.</small>
+                        </div>
+
+                        <p><strong>Das Angebot beinhaltet:</strong></p>
+                        <ul>
+                            <li>Kaufpreis: *|OFFER_AMOUNT|* € (Netto wie Brutto)</li>
+                            <li>Notar- & Gerichtskosten: 0 € (Übernehmen wir)</li>
+                            <li>Maklerprovision: 0 €</li>
+                            <li>Auszahlung: In 7-30 Tagen (nach Wunsch)</li>
+                        </ul>
+
+                        <p>Möchten Sie dieses Angebot besprechen oder annehmen?</p>
+
+                        <div style="text-align: center;">
+                            <a href="tel:0123456789" class="button">📞 Jetzt anrufen & verkaufen</a>
+                        </div>
+
+                        <p style="margin-top: 20px; font-size: 14px; color: #64748b;">Dieses Angebot ist 7 Tage gültig.
+                        </p>
+                    </div>
+                    <div class="footer">
+                        <p>© 2026 ImmoWERT24. Alle Rechte vorbehalten.</p>
+                        <p><a href="*|UNSUB|*">Abmelden</a></p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

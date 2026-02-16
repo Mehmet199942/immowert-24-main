@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vielen Dank! | ImmoWERT24</title>
+    <meta name="description" content="Vielen Dank für Ihre Anfrage. Wir melden uns in Kürze.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .thank-you-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .thank-you-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: center;
+            animation: slideInUp 0.5s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        p {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="funnel-page-header"
+        style="background: white; padding: 1rem 0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); text-align: center;">
+        <div class="logo" style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">
+            ImmoWERT<span style="color: #2563eb;">24</span>
+        </div>
+    </header>
+
+    <main class="thank-you-container">
+        <div class="thank-you-card">
+            <div class="emoji">🎉</div>
+            <h1>Vielen Dank!</h1>
+            <p>
+                Wir haben Ihre Daten erhalten und erstellen Ihre individuelle Bewertung.<br>
+                Sie hören in Kürze von uns.
+            </p>
+            <a href="index.html" class="btn-primary">Zurück zur Startseite</a>
+        </div>
+    </main>
+
+</body>
+
+</html>

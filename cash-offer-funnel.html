@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wohnung schnell verkaufen | Barangebot in 24 Stunden | ImmoWERT24</title>
+    <meta name="description"
+        content="Verkaufen Sie Ihre Wohnung schnell gegen Barzahlung. Kein Makler, keine Reparaturen, closing in 7 Tagen. Jetzt kostenloses Angebot anfordern.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="funnel-styles.css">
+
+    <!-- Google Analytics (Placeholder) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    <!-- Facebook Pixel (Placeholder) -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
+</head>
+
+<body class="funnel-page">
+
+    <!-- Header (Identical to index.html) -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                ImmoWERT<span class="accent">24</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html#bewertung">Bewertung starten</a>
+                <a href="index.html#so-gehts">So geht's</a>
+                <a href="index.html#vorteile">Vorteile</a>
+            </nav>
+            <button class="btn-header" onclick="openFunnel()">Kostenlos bewerten</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="trust-badge">
+                    <span>✓ 500+ Immobilien gekauft · A+ Bewertung</span>
+                </div>
+                <h1 class="hero-title">
+                    Wohnung schnell verkaufen gegen <span class="accent">Barzahlung</span> - Angebot in <span
+                        class="accent">24 Stunden</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Keine Reparaturen, keine Gebühren, kein Stress. Wir kaufen Wohnungen in jedem Zustand und schließen
+                    zum Termin IHRER Wahl.
+                </p>
+
+                <div class="hero-benefits">
+                    <div class="benefit-item">
+                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        Barangebot in 24 Std.
+                    </div>
+                    <div class="benefit-item">
+                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        Keine Reparaturen
+                    </div>
+                    <div class="benefit-item">
+                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        Verkauf in 7-30 Tagen
+                    </div>
+                    <div class="benefit-item">
+                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        0€ Gebühren/Provision
+                    </div>
+                </div>
+
+                <button class="cta-button" onclick="startQuiz()">
+                    Jetzt Barangebot anfordern
+                </button>
+                <p class="no-obligation">Kostenlos & Unverbindlich. Kein Maklervertrag.</p>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">So einfach funktioniert's</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Daten eingeben</h3>
+                        <p>Beantworten Sie ein paar einfache Fragen zu Ihrer Wohnung. Das dauert weniger als 2 Minuten.
+                        </p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Angebot erhalten</h3>
+                        <p>Wir analysieren Ihre Immobilie und unterbreiten Ihnen innerhalb von 24 Stunden ein faires
+                            Barangebot.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Verkauf abschließen</h3>
+                        <p>Bei Annahme wählen Sie den Notartermin. Wir zahlen alle Kaufnebenkosten und überweisen das
+                            Geld sofort.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who We Help Section -->
+        <section class="who-we-help">
+            <div class="container">
+                <h2 class="section-title">Wir helfen Eigentümern in jeder Situation</h2>
+                <p class="section-subtitle">Egal warum Sie verkaufen möchten, wir bieten eine schnelle und diskrete
+                    Lösung.</p>
+
+                <div class="situations-grid">
+                    <div class="situation-card">
+                        <div class="situation-icon">🏚️</div>
+                        <h3>Renovierungsbedürftig</h3>
+                        <p>Wir kaufen wie gesehen. Sie müssen nichts renovieren oder entrümpeln.</p>
+                    </div>
+                    <div class="situation-card">
+                        <div class="situation-icon">📜</div>
+                        <h3>Erbschaft</h3>
+                        <p>Schnelle und einfache Abwicklung bei geerbten Immobilien, auch bei Erbengemeinschaften.</p>
+                    </div>
+                    <div class="situation-card">
+                        <div class="situation-icon">💸</div>
+                        <h3>Finanzielle Engpässe</h3>
+                        <p>Vermeiden Sie die Zwangsversteigerung durch einen schnellen Verkauf zum fairen Preis.</p>
+                    </div>
+                    <div class="situation-card">
+                        <div class="situation-icon">🤝</div>
+                        <h3>Scheidung / Trennung</h3>
+                        <p>Wir ermöglichen eine schnelle Vermögensteilung durch sofortigen Ankauf.</p>
+                    </div>
+                    <div class="situation-card">
+                        <div class="situation-icon">🗓️</div>
+                        <h3>Umzug / Alter</h3>
+                        <p>Wenn es schnell gehen muss oder die Immobilie zur Last wird.</p>
+                    </div>
+                    <div class="situation-card">
+                        <div class="situation-icon">🔑</div>
+                        <h3>Vermietete Wohnung</h3>
+                        <p>Wir kaufen auch vermietete Eigentumswohnungen und übernehmen die Mietverträge.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Was unsere Kunden sagen</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Ich wollte meine alte Eigentumswohnung schnell loswerden, ohne noch
+                            Geld reinzustecken. ImmoWERT24 hat mir ein faires Angebot gemacht und alles lief super
+                            schnell ab."</p>
+                        <div class="testimonial-author">
+                            <strong>Michael K.</strong>
+                            <span>Verkaufte Wohnung in Berlin</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Nach dem Erbe meiner Tante war ich überfordert. Das Team war sehr
+                            verständnisvoll und hat mir den Verkauf extrem einfach gemacht. Geld war nach 2 Wochen da."
+                        </p>
+                        <div class="testimonial-author">
+                            <strong>Sabine W.</strong>
+                            <span>Verkaufte geerbte Wohnung</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Hatte Angst vor einer Zwangsversteigerung. ImmoWERT24 hat die
+                            Wohnung noch rechtzeitig gekauft und mir damit sehr geholfen. Danke!"</p>
+                        <div class="testimonial-author">
+                            <strong>Thomas R.</strong>
+                            <span>Verkaufte vor ZV</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="container">
+                <h2 class="section-title">Häufig gestellte Fragen</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3 class="faq-question">Entstehen mir Kosten?</h3>
+                        <p class="faq-answer">Nein. Unser Service ist für Sie komplett kostenlos. Wir kaufen
+                            provisionsfrei und übernehmen in der Regel auch die Notar- und Grundbuchkosten.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Wie schnell erhalte ich mein Geld?</h3>
+                        <p class="faq-answer">Nach dem Notartermin erfolgt die Zahlung meist innerhalb von wenigen
+                            Tagen, sobald die Fälligkeitsvoraussetzungen erfüllt sind. Insgesamt dauert der Prozess oft
+                            nur 2-4 Wochen.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Muss ich die Wohnung entrümpeln?</h3>
+                        <p class="faq-answer">Nein. Sie können die Wohnung genau so übergeben, wie sie ist. Wir
+                            übernehmen auf Wunsch die komplette Entrümpelung für Sie.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Ist das Angebot verbindlich?</h3>
+                        <p class="faq-answer">Unser Kaufangebot ist für uns verbindlich, für Sie jedoch völlig
+                            unverbindlich. Sie entscheiden in Ruhe, ob Sie es annehmen möchten.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container cta-content">
+                <h2>Bereit für Ihren Verkauf?</h2>
+                <p>Erhalten Sie Ihr unverbindliches Barangebot in den nächsten 24 Stunden.</p>
+                <button class="cta-button" onclick="startQuiz()">
+                    Jetzt Angebot anfordern
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Identical to index.html) -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>Über ImmoWERT24</h4>
+                <ul>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="karriere.html">Karriere</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="barrierefreiheit.html">Barrierefreiheit</a></li>
+                    <li><a href="impressum.html">Impressum</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="kontakt.html">Kontakt & Hilfe</a></li>
+                    <li><a href="presseservice.html">Presseservice</a></li>
+                    <li><a href="kuendigung.html">Verträge hier kündigen</a></li>
+                    <li><a href="it-entwicklung.html">IT & Entwicklung</a></li>
+                    <li><a href="preisatlas.html">Preisatlas</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Sicherheit</h4>
+                <ul>
+                    <li><a href="agb.html">AGB & Rechtliche Hinweise</a></li>
+                    <li><a href="verbraucherinformationen.html">Verbraucherinformationen</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                    <li><a href="privacy-manager.html">Zum Privacy-Manager</a></li>
+                    <li><a href="datenschutz-kodex.html">Datenschutz-Kodex</a></li>
+                    <li><a href="sicherheit.html">Sicherheit</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Für Profis</h4>
+                <ul>
+                    <li><a href="produktuebersicht.html">Produktübersicht</a></li>
+                    <li><a href="maklernetzwerk.html">Maklernetzwerk</a></li>
+                    <li><a href="eigentuemeranfragen.html">Eigentümeranfragen</a></li>
+                    <li><a href="finanzierungsanfragen.html">Finanzierungsanfragen</a></li>
+                    <li><a href="umzugsanfragen.html">Umzugsanfragen</a></li>
+                    <li><a href="modernisierungsanfragen.html">Modernisierungsanfragen</a></li>
+                    <li><a href="werben.html">Werben mit uns</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <div class="footer-logo">ImmoWERT<span class="accent">24</span></div>
+            <p class="footer-copyright">© 2026 ImmoWERT24. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="quiz-modal">
+        <div class="quiz-container">
+            <button class="close-btn" onclick="closeQuiz()">&times;</button>
+
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <div id="progressText" class="progress-text">Frage 1 von 7</div>
+
+            <div class="quiz-content">
+                <!-- Step 1: Property Type -->
+                <div id="step1" class="quiz-step active">
+                    <h2>Welche Art von Immobilie verkaufen Sie?</h2>
+                    <p class="step-subtitle">Wählen Sie die beste Option.</p>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption('propertyType', 'House', 2)">
+                            <span class="option-icon">🏠</span>
+                            Einfamilienhaus
+                        </button>
+                        <button class="option-btn" onclick="selectOption('propertyType', 'Apartment', 2)">
+                            <span class="option-icon">🏢</span>
+                            Wohnung
+                        </button>
+                        <button class="option-btn" onclick="selectOption('propertyType', 'MultiFamily', 2)">
+                            <span class="option-icon">🏘️</span>
+                            Mehrfamilienhaus
+                        </button>
+                        <button class="option-btn" onclick="selectOption('propertyType', 'Commercial', 2)">
+                            <span class="option-icon">🏬</span>
+                            Gewerbe
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Condition -->
+                <div id="step2" class="quiz-step">
+                    <button class="back-btn" onclick="goToStep(1)">← Zurück</button>
+                    <h2>In welchem Zustand ist die Immobilie?</h2>
+                    <p class="step-subtitle">Seien Sie ehrlich - wir kaufen in jedem Zustand.</p>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption('condition', 'Excellent', 3)">
+                            <span class="option-icon">⭐</span>
+                            Top Zustand (sofort bezugsfertig)
+                        </button>
+                        <button class="option-btn" onclick="selectOption('condition', 'Good', 3)">
+                            <span class="option-icon">👍</span>
+                            Gut (leichte Schönheitsfehler)
+                        </button>
+                        <button class="option-btn" onclick="selectOption('condition', 'Fair', 3)">
+                            <span class="option-icon">🔧</span>
+                            Mittel (renovierungsbedürftig)
+                        </button>
+                        <button class="option-btn" onclick="selectOption('condition', 'Poor', 3)">
+                            <span class="option-icon">🛠️</span>
+                            Schlecht (sanierungsbedürftig)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Situation -->
+                <div id="step3" class="quiz-step">
+                    <button class="back-btn" onclick="goToStep(2)">← Zurück</button>
+                    <h2>Wie ist Ihre Situation?</h2>
+                    <p class="step-subtitle">Wählen Sie alle zutreffenden Punkte (optional).</p>
+                    <div class="checkbox-options">
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="situation" value="NeedCash">
+                            <span class="checkbox-label">Brauche schnell Geld</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="situation" value="Inherited">
+                            <span class="checkbox-label">Immobilie geerbt</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="situation" value="Foreclosure">
+                            <span class="checkbox-label">Drohende Zwangsversteigerung</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="situation" value="Relocation">
+                            <span class="checkbox-label">Umzug / Arbeit</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="situation" value="Tenants">
+                            <span class="checkbox-label">Probleme mit Mietern</span>
+                        </label>
+                    </div>
+                    <button class="continue-btn" onclick="goToStep(4)">Weiter</button>
+                </div>
+
+                <!-- Step 4: Timeline -->
+                <div id="step4" class="quiz-step">
+                    <button class="back-btn" onclick="goToStep(3)">← Zurück</button>
+                    <h2>Wie schnell möchten Sie verkaufen?</h2>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption('timeline', 'ASAP', 5)">
+                            <span class="option-icon">⚡</span>
+                            So schnell wie möglich (7-14 Tage)
+                        </button>
+                        <button class="option-btn" onclick="selectOption('timeline', '30Days', 5)">
+                            <span class="option-icon">📅</span>
+                            Innerhalb 30 Tagen
+                        </button>
+                        <button class="option-btn" onclick="selectOption('timeline', '60Days', 5)">
+                            <span class="option-icon">🗓️</span>
+                            In 1-2 Monaten
+                        </button>
+                        <button class="option-btn" onclick="selectOption('timeline', 'Flexible', 5)">
+                            <span class="option-icon">🐢</span>
+                            Flexibel / Habe Zeit
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Address -->
+                <div id="step5" class="quiz-step">
+                    <button class="back-btn" onclick="goToStep(4)">← Zurück</button>
+                    <h2>Wo befindet sich die Immobilie?</h2>
+                    <div class="quiz-form">
+                        <div class="form-group">
+                            <label>Straße & Hausnummer</label>
+                            <input type="text" id="street" placeholder="Musterstraße 123">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>PLZ</label>
+                                <input type="text" id="zip" placeholder="10115">
+                            </div>
+                            <div class="form-group">
+                                <label>Stadt</label>
+                                <input type="text" id="city" placeholder="Berlin">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Bundesland</label>
+                            <input type="text" id="state" placeholder="Berlin">
+                        </div>
+                    </div>
+                    <button class="continue-btn" onclick="validateAddress()">Weiter</button>
+                </div>
+
+                <!-- Step 6: Contact Info (Lead Form) -->
+                <div id="step6" class="quiz-step">
+                    <button class="back-btn" onclick="goToStep(5)">← Zurück</button>
+                    <h2>Wohin sollen wir das Angebot senden?</h2>
+                    <div class="value-prop">🎉 Angebot in 24 Stunden fertig!</div>
+
+                    <form id="leadForm" onsubmit="submitLead(event)" method="POST"
+                        action="https://formsubmit.co/your-email@example.com">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://yourdomain.com/thanks">
+                        <input type="hidden" name="subject" value="New Cash Offer Lead">
+                        <!-- Hidden fields for quiz data -->
+                        <input type="hidden" id="hiddenPropertyType" name="propertyType">
+                        <input type="hidden" id="hiddenCondition" name="condition">
+                        <input type="hidden" id="hiddenSituation" name="situation">
+                        <input type="hidden" id="hiddenTimeline" name="timeline">
+                        <input type="hidden" id="hiddenAddress" name="address">
+
+                        <div class="quiz-form">
+                            <div class="form-group">
+                                <label>Vollständiger Name</label>
+                                <input type="text" id="fullName" name="name" required placeholder="Max Mustermann">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefonnummer</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="0171 12345678">
+                            </div>
+                            <div class="form-group">
+                                <label>E-Mail Adresse</label>
+                                <input type="email" id="email" name="email" required placeholder="max@beispiel.de">
+                            </div>
+                            <div class="form-group">
+                                <label>Beste Anrufzeit?</label>
+                                <select id="callTime" name="callTime">
+                                    <option value="Anytime">Jederzeit</option>
+                                    <option value="Morning">Vormittags</option>
+                                    <option value="Afternoon">Nachmittags</option>
+                                    <option value="Evening">Abends</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="submit-btn">
+                            <span id="submitText">Angebot jetzt anfordern</span>
+                            <span id="submitLoader" class="hidden">Wird gesendet...</span>
+                        </button>
+                        <p class="email-confirmation">🔒 100% sicher & spamfrei.</p>
+                    </form>
+                </div>
+
+                <!-- Step 7: Thank You -->
+                <div id="step7" class="quiz-step">
+                    <div class="success-message">
+                        <div class="success-icon">✓</div>
+                        <h2>Vielen Dank, <span id="thankYouName"></span>!</h2>
+                        <p class="success-text">Wir haben Ihre Anfrage erhalten. Unser Team analysiert gerade Ihre
+                            Immobilie in <span id="thankYouAddress"></span>.</p>
+
+                        <div class="next-steps">
+                            <h3>So geht es weiter:</h3>
+                            <ol>
+                                <li>Wir melden uns unter <strong id="thankYouPhone"></strong>.</li>
+                                <li>Wir senden Ihnen das Angebot an <strong id="thankYouEmail"></strong>.</li>
+                                <li>Sie erhalten Ihr Angebot in max. 24 Stunden.</li>
+                            </ol>
+                        </div>
+
+                        <div class="contact-box">
+                            <p>Haben Sie dringende Fragen?</p>
+                            <a href="tel:0123456789" class="phone-cta">📞 0123 456 789</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="funnel-script.js"></script>
+</body>
+
+</html>

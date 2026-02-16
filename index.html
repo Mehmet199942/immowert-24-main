@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoWERT24 - Kostenlose Immobilienbewertung</title>
+    <meta name="description"
+        content="Erfahren Sie den aktuellen Marktwert Ihrer Immobilie – präzise, schnell und völlig kostenfrei. Professionelle Bewertung in nur 2 Minuten.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Lead Funnel Modal -->
+    <div id="funnelModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeFunnel()">&times;</button>
+
+            <!-- Step 1: Property Type -->
+            <div class="funnel-step" id="step1">
+                <h2>Welche Art von Immobilie möchten Sie bewerten?</h2>
+                <div class="property-types">
+                    <button class="property-btn" onclick="selectProperty('Haus')">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        <span>Haus</span>
+                    </button>
+                    <button class="property-btn" onclick="selectProperty('Wohnung')">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
+                        </svg>
+                        <span>Wohnung</span>
+                    </button>
+                    <button class="property-btn" onclick="selectProperty('Grundstück')">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7">
+                            </path>
+                        </svg>
+                        <span>Grundstück</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Property Details -->
+            <div class="funnel-step hidden" id="step2">
+                <button class="back-btn" onclick="goToStep(1)">← Zurück</button>
+                <h2>Details zu Ihrer Immobilie</h2>
+                <form class="funnel-form">
+                    <div class="form-group">
+                        <label>Wohnfläche (m²)</label>
+                        <input type="number" id="area" required min="1" placeholder="z.B. 120">
+                    </div>
+                    <div class="form-group">
+                        <label>Anzahl Zimmer</label>
+                        <input type="number" id="rooms" required min="1" placeholder="z.B. 4">
+                    </div>
+                    <div class="form-group">
+                        <label>Baujahr</label>
+                        <input type="number" id="year" required min="1800" max="2026" placeholder="z.B. 2005">
+                    </div>
+                    <button type="button" class="btn-primary" onclick="validateStep2()">Weiter</button>
+                </form>
+            </div>
+
+            <!-- Step 3: Location -->
+            <div class="funnel-step hidden" id="step3">
+                <button class="back-btn" onclick="goToStep(2)">← Zurück</button>
+                <h2>Wo befindet sich Ihre Immobilie?</h2>
+                <form class="funnel-form">
+                    <div class="form-group">
+                        <label>Postleitzahl</label>
+                        <input type="text" id="zip" required pattern="[0-9]{5}" placeholder="z.B. 10115">
+                    </div>
+                    <button type="button" class="btn-primary" onclick="validateStep3()">Weiter</button>
+                </form>
+            </div>
+
+            <!-- Step 4: Contact -->
+            <div class="funnel-step hidden" id="step4">
+                <button class="back-btn" onclick="goToStep(3)">← Zurück</button>
+                <h2>Wie können wir Sie erreichen?</h2>
+                <form id="leadForm" class="funnel-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Vorname</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nachname</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>E-Mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <!-- Hidden fields for form data -->
+                    <input type="hidden" name="propertyType" id="hiddenPropertyType">
+                    <input type="hidden" name="area" id="hiddenArea">
+                    <input type="hidden" name="rooms" id="hiddenRooms">
+                    <input type="hidden" name="year" id="hiddenYear">
+                    <input type="hidden" name="zip" id="hiddenZip">
+                    <input type="hidden" name="_subject" value="Neue Immobilienbewertung - ImmoWERT24">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://mehmet199942.github.io/immowert-24/danke.html">
+                    <input type="text" name="_honey" style="display:none">
+
+                    <button type="submit" class="btn-primary" id="submitBtn">
+                        <span id="submitText">Kostenlose Bewertung anfordern</span>
+                        <span id="submitLoader" class="hidden">Wird gesendet...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                ImmoWERT<span class="accent">24</span>
+            </div>
+            <nav class="nav">
+                <a href="#bewertung">Bewertung starten</a>
+                <a href="#so-gehts">So geht's</a>
+                <a href="#vorteile">Vorteile</a>
+            </nav>
+            <button class="btn-header" onclick="openFunnel()">Kostenlos bewerten</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="badge">
+                        ✓ In nur 2 Minuten · Kostenlos & Unverbindlich
+                    </div>
+                    <h1 class="hero-title">
+                        Ihre Immobilie <span class="accent">richtig bewertet</span>, erfolgreich verkauft
+                    </h1>
+                    <p class="hero-subtitle">
+                        Erfahren Sie den aktuellen Marktwert Ihrer Immobilie – präzise, schnell und völlig kostenfrei.
+                        Professionelle Bewertung in nur 2 Minuten.
+                    </p>
+                    <div class="hero-cta">
+                        <button class="btn-primary btn-large" onclick="openFunnel()">
+                            Jetzt kostenlos bewerten →
+                        </button>
+                        <div class="trust-score">
+                            <div class="stars">★★★★★</div>
+                            <span>4.9/5 TrustScore</span>
+                        </div>
+                    </div>
+                    <div class="hero-badges">
+                        <span>✓ TÜV geprüft</span>
+                        <span>✓ Datensicher</span>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&auto=format&fit=crop"
+                        alt="Traumhaus">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="container trust-content">
+            <p class="trust-label">BEKANNT AUS</p>
+            <div class="trust-logos">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Welt_TV_Logo_2016.svg" alt="WELT">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Frankfurter_Allgemeine_logo.svg"
+                    alt="FAZ">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Handelsblatt_logo.svg" alt="Handelsblatt">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/ImmobilienScout24_logo.svg"
+                    alt="ImmoScout24">
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Counter -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Bewertungen durchgeführt</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-label">Kundenzufriedenheit</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-number" data-target="2">0</div>
+                    <div class="stat-label">Minuten Durchschnitt</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="so-gehts" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>In 3 Schritten zur Bewertung</h2>
+                <p>Unser intelligenter Algorithmus analysiert Ihre Immobiliendaten und vergleicht diese mit aktuellen
+                    Marktdaten.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Daten eingeben</h3>
+                    <p>Beschreiben Sie Ihre Immobilie in wenigen Schritten.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Analyse</h3>
+                    <p>Wir vergleichen Ihre Daten mit ähnlichen Objekten.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Ergebnis erhalten</h3>
+                    <p>Sie erhalten Ihre Bewertung bequem per E-Mail.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="vorteile" class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Warum ImmoWERT24?</h2>
+                <p>Profitieren Sie von unserer Expertise und erhalten Sie eine präzise Immobilienbewertung</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3>Kostenlos & Unverbindlich</h3>
+                    <p>Keine versteckten Kosten. Ihre Bewertung ist zu 100% kostenfrei.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <h3>Marktgerecht</h3>
+                    <p>Basierend auf aktuellen Marktdaten und vergleichbaren Objekten.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3>Schnell & Einfach</h3>
+                    <p>In nur 2 Minuten erhalten Sie Ihre professionelle Bewertung.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3>Datenschutz</h3>
+                    <p>DSGVO-konform. Ihre Daten sind bei uns sicher.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>Über ImmoWERT24</h4>
+                <ul>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="karriere.html">Karriere</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="barrierefreiheit.html">Barrierefreiheit</a></li>
+                    <li><a href="impressum.html">Impressum</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="kontakt.html">Kontakt & Hilfe</a></li>
+                    <li><a href="presseservice.html">Presseservice</a></li>
+                    <li><a href="kuendigung.html">Verträge hier kündigen</a></li>
+                    <li><a href="it-entwicklung.html">IT & Entwicklung</a></li>
+                    <li><a href="preisatlas.html">Preisatlas</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Sicherheit</h4>
+                <ul>
+                    <li><a href="agb.html">AGB & Rechtliche Hinweise</a></li>
+                    <li><a href="verbraucherinformationen.html">Verbraucherinformationen</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                    <li><a href="privacy-manager.html">Zum Privacy-Manager</a></li>
+                    <li><a href="datenschutz-kodex.html">Datenschutz-Kodex</a></li>
+                    <li><a href="sicherheit.html">Sicherheit</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Für Profis</h4>
+                <ul>
+                    <li><a href="produktuebersicht.html">Produktübersicht</a></li>
+                    <li><a href="maklernetzwerk.html">Maklernetzwerk</a></li>
+                    <li><a href="eigentuemeranfragen.html">Eigentümeranfragen</a></li>
+                    <li><a href="finanzierungsanfragen.html">Finanzierungsanfragen</a></li>
+                    <li><a href="umzugsanfragen.html">Umzugsanfragen</a></li>
+                    <li><a href="modernisierungsanfragen.html">Modernisierungsanfragen</a></li>
+                    <li><a href="werben.html">Werben mit uns</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <div class="footer-logo">ImmoWERT<span class="accent">24</span></div>
+            <p class="footer-copyright">© 2026 ImmoWERT24. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>

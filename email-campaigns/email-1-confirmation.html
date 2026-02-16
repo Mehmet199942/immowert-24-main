@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ihre Anfrage bei ImmoWERT24</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            min-width: 100%;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .accent {
+            color: #f59e0b;
+        }
+
+        .content {
+            padding: 40px 30px;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 22px;
+            color: #1e293b;
+        }
+
+        p {
+            margin: 0 0 15px;
+        }
+
+        .checklist {
+            margin: 25px 0;
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .check-item {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #f59e0b;
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .footer {
+            background-color: #f1f5f9;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .footer a {
+            color: #64748b;
+            text-decoration: underline;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding: 20px 0;">
+                <div class="container">
+                    <!-- Header -->
+                    <div class="header">
+                        <a href="https://yourwebsite.com" class="logo">ImmoWERT<span class="accent">24</span></a>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="content">
+                        <h1>Vielen Dank für Ihre Anfrage, *|FNAME|*!</h1>
+
+                        <p>Wir haben Ihre Bewertungsanfrage für die Immobilie in <strong>*|ADDRESS|*</strong> erhalten.
+                        </p>
+
+                        <p><strong>So geht es jetzt weiter:</strong></p>
+
+                        <div class="checklist">
+                            <span class="check-item">✓ Unser Team analysiert aktuell Ihre Immobilie</span>
+                            <span class="check-item">✓ Wir erstellen Ihr unverbindliches Barangebot</span>
+                            <span class="check-item">✓ Sie erhalten das Angebot innerhalb von 24 Stunden</span>
+                        </div>
+
+                        <div
+                            style="background-color: #eff6ff; padding: 15px; border-radius: 6px; font-size: 14px; margin-bottom: 20px;">
+                            <strong>Hinweis:</strong> Wir werden Sie unter <strong>*|PHONE|*</strong> kontaktieren, um
+                            eventuelle Rückfragen zur Immobilie zu klären.
+                        </div>
+
+                        <p>Haben Sie dringende Fragen? Rufen Sie uns jederzeit an:</p>
+
+                        <a href="tel:0123456789" class="button">📞 0123 456 789 anrufen</a>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="footer">
+                        <p>© 2026 ImmoWERT24. Alle Rechte vorbehalten.</p>
+                        <p>
+                            <a href="*|UNSUB|*">Abmelden</a> |
+                            <a href="*|UPDATE_PROFILE|*">Einstellungen</a>
+                        </p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
