@@ -155,16 +155,28 @@ body {
     overflow: hidden;
 }
 
-.hero-grid {
-    display: grid;
+.hero-layout {
+    display: flex;
+    flex-direction: column;
     gap: 3rem;
-    align-items: center;
 }
 
-.hero-content {
+.hero-text-split {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+.hero-title-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.hero-subtitle-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .badge {
@@ -251,28 +263,35 @@ body {
     color: var(--text-light);
 }
 
-.hero-image {
+.hero-image-wide {
     position: relative;
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    aspect-ratio: 4/3;
+    aspect-ratio: 21/9;
 }
 
-.hero-image img {
+.hero-image-wide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.7s;
 }
 
-.hero-image:hover img {
+.hero-image-wide:hover img {
     transform: scale(1.05);
 }
 
 @media (min-width: 1024px) {
-    .hero-grid {
-        grid-template-columns: 1fr 1fr;
+    .hero-text-split {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+    }
+
+    .hero-title-col {
+        padding-right: 2rem;
     }
 
     .hero-title {
