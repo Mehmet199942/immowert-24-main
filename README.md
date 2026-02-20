@@ -1,4 +1,4 @@
-# ImmoWERT24 - Static Website
+# Dr. Schwarz Immobilien - Static Website
 
 🏠 **Kostenlose Immobilienbewertung Landing Page** - Ready for GitHub Pages deployment.
 
@@ -25,7 +25,7 @@ git init
 git add .
 
 # Create initial commit
-git commit -m "Initial commit: ImmoWERT24 website"
+git commit -m "Initial commit: Dr. Schwarz Immobilien website"
 
 # Rename branch to main
 git branch -M main
