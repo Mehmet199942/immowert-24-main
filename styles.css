@@ -45,75 +45,101 @@ body {
     top: 0;
     z-index: 100;
     width: 100%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
-    background: rgba(251, 251, 253, 0.82);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 2.75rem;
+    height: 4.5rem;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem 0 0;
+    padding: 0 2rem;
+    gap: 2rem;
 }
 
 .logo {
     font-size: 0.875rem;
     font-weight: 400;
-    color: var(--text);
+    color: #ffffff;
     letter-spacing: 0;
+    flex-shrink: 0;
 }
 
 .logo .accent {
-    color: var(--text);
+    color: #ffffff;
 }
 
 .logo-img {
-    height: 2.5rem;
+    height: 2.4rem;
     width: auto;
     display: block;
-    border-radius: 4px;
+    /* Blackstone-style bordered box — keep logo's own colors */
+    border: 1px solid rgba(0, 0, 0, 0.55);
+    padding: 0.3rem 0.55rem;
+    border-radius: 2px;
+    background: transparent;
 }
 
 .nav {
     display: none;
-    gap: 1.25rem;
+    gap: 2rem;
+    flex: 1;
+    justify-content: center;
 }
 
 .nav a {
     text-decoration: none;
-    color: var(--text);
-    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 0.8125rem;
     font-weight: 400;
+    letter-spacing: 0.01em;
     transition: color 0.2s;
-    opacity: 0.8;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #000000;
+    transition: width 0.25s ease;
 }
 
 .nav a:hover {
-    opacity: 1;
-    color: var(--text);
+    color: #000000;
+}
+
+.nav a:hover::after {
+    width: 100%;
 }
 
 .btn-header {
-    background: var(--text);
-    color: var(--white);
-    padding: 0.4rem 1.1rem;
-    border: none;
+    background: transparent;
+    color: #000000;
+    padding: 0.45rem 1.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.6);
     border-radius: var(--radius-btn);
     font-size: 0.8rem;
     font-weight: 400;
     cursor: pointer;
-    transition: background 0.2s;
-    letter-spacing: 0;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    letter-spacing: 0.01em;
     font-family: inherit;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .btn-header:hover {
-    background: #424245;
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
 }
 
 @media (min-width: 768px) {
