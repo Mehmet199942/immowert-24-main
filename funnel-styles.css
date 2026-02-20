@@ -3,35 +3,39 @@
 
 :root {
     /* Funnel Specific Colors */
-    --accent-hover: #e85a2a;
-    --bg-light: #f8f9fa;
-    --bg-dark: #0f0f1e;
-    --text-dark: #1a1a2e;
-    --success: #28a745;
+    --accent-hover: #424245;
+    --bg-light: #F5F5F7;
+    --bg-dark: #1D1D1F;
+    --text-dark: #1D1D1F;
+    --success: #34C759;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-accent: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-    --gradient-hero: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    --gradient-primary: linear-gradient(135deg, #1D1D1F 0%, #424245 100%);
+    --gradient-accent: linear-gradient(135deg, #1D1D1F 0%, #424245 100%);
+    --gradient-hero: linear-gradient(135deg, #F5F5F7 0%, #FFFFFF 100%);
 
     /* Shadows */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 2px 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 2px 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 2px 8px 24px rgba(0, 0, 0, 0.10);
+    --shadow-xl: 2px 16px 40px rgba(0, 0, 0, 0.12);
 
     /* Transitions */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+    --transition-slow: 0.4s ease;
 }
 
 /* Ensure body inherits correctly but allows for specific funnel overrides if needed */
 body.funnel-page {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: "SF Pro Display", "SF Pro Text", "SF Pro Icons", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.47059;
     color: var(--text-dark);
     background: var(--white);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* We use the header from styles.css, so we don't need to redefine .header here */
@@ -80,9 +84,10 @@ body.funnel-page {
 
 .hero-title {
     font-size: 2.75rem;
-    font-weight: 800;
-    line-height: 1.2;
+    font-weight: 600;
+    line-height: 1.08;
     margin-bottom: 1.5rem;
+    letter-spacing: -0.022em;
     animation: fadeInUp 0.6s ease 0.1s both;
 }
 
@@ -95,11 +100,12 @@ body.funnel-page {
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.0625rem;
+    line-height: 1.47059;
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 2.5rem;
     animation: fadeInUp 0.6s ease 0.2s both;
+    font-weight: 400;
 }
 
 .hero-benefits {
@@ -126,7 +132,7 @@ body.funnel-page {
 }
 
 .cta-button {
-    background: var(--gradient-accent);
+    background: #000000;
     color: var(--white);
     border: none;
     padding: 1.125rem 2.5rem;
@@ -134,7 +140,7 @@ body.funnel-page {
     font-weight: 700;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     transition: all var(--transition-normal);
     animation: fadeInUp 0.6s ease 0.4s both;
     display: inline-block;
@@ -142,7 +148,7 @@ body.funnel-page {
 
 .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
 }
 
 .cta-button:active {
@@ -152,7 +158,7 @@ body.funnel-page {
 .no-obligation {
     margin-top: 1rem;
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.6);
     animation: fadeInUp 0.6s ease 0.5s both;
 }
 
@@ -193,7 +199,7 @@ body.funnel-page {
 
 .quiz-container {
     background: var(--white);
-    border-radius: 20px;
+    border-radius: 18px;
     width: 100%;
     max-width: 600px;
     max-height: 90vh;
@@ -236,7 +242,7 @@ body.funnel-page {
 
 .progress-fill {
     height: 100%;
-    background: var(--gradient-accent);
+    background: #000000;
     width: 0%;
     transition: width 0.4s ease;
 }
@@ -284,7 +290,7 @@ body.funnel-page {
 }
 
 .back-btn:hover {
-    color: var(--accent);
+    color: var(--primary);
 }
 
 .options-grid {
@@ -299,8 +305,8 @@ body.funnel-page {
     align-items: center;
     gap: 0.75rem;
     padding: 1.5rem 1rem;
-    border: 2px solid var(--border);
-    border-radius: 12px;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    border-radius: 14px;
     background: var(--white);
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -310,8 +316,8 @@ body.funnel-page {
 }
 
 .option-btn:hover {
-    border-color: var(--accent);
-    background: rgba(255, 107, 53, 0.05);
+    border-color: rgba(0, 0, 0, 0.3);
+    background: #F0F0EE;
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -331,22 +337,22 @@ body.funnel-page {
     align-items: center;
     gap: 0.75rem;
     padding: 1rem;
-    border: 2px solid var(--border);
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
     border-radius: 10px;
     cursor: pointer;
     transition: all var(--transition-fast);
 }
 
 .checkbox-option:hover {
-    border-color: var(--accent);
-    background: rgba(255, 107, 53, 0.05);
+    border-color: rgba(0, 0, 0, 0.3);
+    background: #F0F0EE;
 }
 
 .checkbox-option input[type="checkbox"] {
     width: 20px;
     height: 20px;
     cursor: pointer;
-    accent-color: var(--accent);
+    accent-color: var(--primary);
 }
 
 .checkbox-label {
@@ -358,7 +364,7 @@ body.funnel-page {
 .continue-btn,
 .submit-btn {
     width: 100%;
-    background: var(--gradient-accent);
+    background: #000000;
     color: var(--white);
     border: none;
     padding: 1rem 2rem;
@@ -368,13 +374,13 @@ body.funnel-page {
     cursor: pointer;
     margin-top: 1.5rem;
     transition: all var(--transition-normal);
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .continue-btn:hover,
 .submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .quiz-form {
@@ -414,12 +420,12 @@ body.funnel-page {
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
 
 .value-prop {
-    background: var(--gradient-accent);
+    background: #000000;
     color: var(--white);
     padding: 1rem;
     border-radius: 10px;
@@ -436,7 +442,7 @@ body.funnel-page {
 .success-icon {
     width: 80px;
     height: 80px;
-    background: var(--gradient-accent);
+    background: #000000;
     color: var(--white);
     border-radius: 50%;
     display: flex;
@@ -521,15 +527,15 @@ body.funnel-page {
 .step-card {
     background: var(--white);
     padding: 2rem;
-    border-radius: 16px;
-    box-shadow: var(--shadow-md);
+    border-radius: 18px;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
     transition: all var(--transition-normal);
     position: relative;
 }
 
 .step-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    border-color: rgba(0, 0, 0, 0.2);
 }
 
 .step-number {
@@ -538,7 +544,7 @@ body.funnel-page {
     left: 2rem;
     width: 50px;
     height: 50px;
-    background: var(--gradient-accent);
+    background: #000000;
     color: var(--white);
     border-radius: 50%;
     display: flex;
@@ -582,16 +588,16 @@ body.funnel-page {
 }
 
 .situation-card {
-    background: var(--bg-light);
+    background: #F0F0EE;
     padding: 2rem;
-    border-radius: 16px;
+    border-radius: 18px;
     text-align: center;
     transition: all var(--transition-normal);
-    border: 2px solid transparent;
+    border: 0.5px solid rgba(0, 0, 0, 0.08);
 }
 
 .situation-card:hover {
-    border-color: var(--accent);
+    border-color: rgba(0, 0, 0, 0.25);
     background: var(--white);
     box-shadow: var(--shadow-lg);
     transform: translateY(-3px);
@@ -646,7 +652,7 @@ body.funnel-page {
 }
 
 .stars {
-    color: #ffc107;
+    color: #1D1D1F;
     font-size: 1.25rem;
     margin-bottom: 1rem;
 }
@@ -689,13 +695,13 @@ body.funnel-page {
 .faq-item {
     background: var(--white);
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-normal);
+    border-radius: 14px;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    transition: border-color var(--transition-normal);
 }
 
 .faq-item:hover {
-    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 0, 0, 0.2);
 }
 
 .faq-question {
@@ -767,14 +773,14 @@ body.funnel-page {
 }
 
 .footer-contact a {
-    color: var(--accent);
+    color: var(--white);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition-fast);
 }
 
 .footer-contact a:hover {
-    color: var(--accent-hover);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .footer-bottom {
