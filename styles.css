@@ -73,7 +73,7 @@ body {
 }
 
 .logo-img {
-    height: 1.75rem;
+    height: 2.5rem;
     width: auto;
     display: block;
     filter: invert(1);
@@ -583,7 +583,7 @@ body {
 }
 
 .footer-logo-img {
-    height: 1.5rem;
+    height: 2rem;
     width: auto;
     display: block;
     filter: invert(1);
