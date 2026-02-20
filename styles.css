@@ -72,6 +72,14 @@ body {
     color: var(--text);
 }
 
+.logo-img {
+    height: 1.75rem;
+    width: auto;
+    display: block;
+    filter: invert(1);
+    mix-blend-mode: multiply;
+}
+
 .nav {
     display: none;
     gap: 1.25rem;
@@ -572,6 +580,14 @@ body {
 
 .footer-logo .accent {
     color: var(--text);
+}
+
+.footer-logo-img {
+    height: 1.5rem;
+    width: auto;
+    display: block;
+    filter: invert(1);
+    mix-blend-mode: multiply;
 }
 
 .footer-copyright {
