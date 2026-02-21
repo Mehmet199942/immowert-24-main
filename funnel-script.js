@@ -1,6 +1,6 @@
 'use strict';
 
-// ===== Security Utilities (duplicated here so this file is self-contained) =====
+// ===== Security Utilities =====
 
 function escapeHTML(str) {
     if (typeof str !== 'string') return '';
@@ -30,10 +30,6 @@ function isValidPhone(phone) {
 let lastFunnelSubmitTime = 0;
 const FUNNEL_SUBMIT_COOLDOWN_MS = 8000;
 
-// ===== Funnel Configuration =====
-// Mailchimp action URL — set via environment/config, never hardcoded with credentials
-const MAILCHIMP_ACTION_URL = ''; // Set this to your Mailchimp form action URL
-
 // ===== Quiz Data Storage =====
 const quizData = {
     propertyType: '',
@@ -57,7 +53,7 @@ const ALLOWED_TIMELINES = ['Sofort', '3–6 Monate', '6–12 Monate', 'Noch unkl
 let currentStep = 1;
 const totalSteps = 7;
 
-// Open Quiz Modal
+// ===== Modal Controls =====
 function startQuiz() {
     const modal = document.getElementById('quizModal');
     if (!modal) return;
@@ -66,12 +62,8 @@ function startQuiz() {
     goToStep(1);
 }
 
-// Alias for index.html header compatibility
-function openFunnel() {
-    startQuiz();
-}
+function openFunnel() { startQuiz(); }
 
-// Close Quiz Modal
 function closeQuiz() {
     const modal = document.getElementById('quizModal');
     if (!modal) return;
@@ -79,66 +71,46 @@ function closeQuiz() {
     document.body.style.overflow = '';
 }
 
-// Navigate to Specific Step
+// ===== Step Navigation =====
 function goToStep(stepNumber) {
-    const steps = document.querySelectorAll('.quiz-step');
-    steps.forEach(function (step) { step.classList.remove('active'); });
-
-    const targetStep = document.getElementById('step' + stepNumber);
-    if (targetStep) {
-        targetStep.classList.add('active');
+    document.querySelectorAll('.quiz-step').forEach(function (s) { s.classList.remove('active'); });
+    const target = document.getElementById('step' + stepNumber);
+    if (target) {
+        target.classList.add('active');
         currentStep = stepNumber;
         updateProgress();
     }
 }
 
-// Update Progress Bar
 function updateProgress() {
-    const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressText');
-
-    const percentage = (currentStep / totalSteps) * 100;
-    if (progressFill) progressFill.style.width = percentage + '%';
-    if (progressText) progressText.textContent = 'Schritt ' + currentStep + ' von ' + totalSteps;
+    const fill = document.getElementById('progressFill');
+    const text = document.getElementById('progressText');
+    const pct = (currentStep / totalSteps) * 100;
+    if (fill) fill.style.width = pct + '%';
+    if (text) text.textContent = 'Schritt ' + currentStep + ' von ' + totalSteps;
 }
 
 /**
- * Select an option and advance.
- * SECURITY: validate field name and value against allowlists.
- * NOTE: caller must pass the event explicitly — do NOT rely on the implicit
- * global `event` object (deprecated, unreliable in strict mode).
- * HTML usage: onclick="selectOption('propertyType','Haus',2,event)"
- *
- * @param {string} field
- * @param {string} value
- * @param {number} nextStep
- * @param {Event} e
+ * Called from onclick — e must be passed explicitly.
+ * HTML: onclick="selectOption('propertyType','Haus',2,event)"
  */
 function selectOption(field, value, nextStep, e) {
-    const FIELD_ALLOWLIST = {
+    const allowlists = {
         propertyType: ALLOWED_PROPERTY_TYPES,
         condition: ALLOWED_CONDITIONS,
         timeline: ALLOWED_TIMELINES
     };
-
-    if (!FIELD_ALLOWLIST[field]) return; // Unknown field
-    if (!FIELD_ALLOWLIST[field].includes(value)) return; // Unknown value
-
+    if (!allowlists[field] || !allowlists[field].includes(value)) return;
     quizData[field] = value;
 
     if (e && e.currentTarget) {
         e.currentTarget.style.transform = 'scale(0.95)';
-        setTimeout(function () {
-            e.currentTarget.style.transform = 'scale(1)';
-        }, 100);
+        setTimeout(function () { e.currentTarget.style.transform = 'scale(1)'; }, 100);
     }
-
-    setTimeout(function () {
-        goToStep(nextStep);
-    }, 300);
+    setTimeout(function () { goToStep(nextStep); }, 300);
 }
 
-// Validate Address Form
+// ===== Address Validation =====
 function validateAddress() {
     const street = sanitiseText(document.getElementById('street').value, 200);
     const city = sanitiseText(document.getElementById('city').value, 100);
@@ -149,12 +121,10 @@ function validateAddress() {
         alert('Bitte füllen Sie alle Adressfelder aus.');
         return;
     }
-
     if (!/^[0-9]{5}$/.test(zip)) {
         alert('Bitte geben Sie eine gültige 5-stellige PLZ ein.');
         return;
     }
-
     quizData.street = street;
     quizData.city = city;
     quizData.state = state;
@@ -162,27 +132,26 @@ function validateAddress() {
     goToStep(6);
 }
 
-// Submit Lead Form
+// ===== Lead Submission (FormSubmit.co only — Mailchimp removed) =====
 function submitLead(event) {
     event.preventDefault();
 
-    // === Rate limiting ===
+    // Rate limiting
     const now = Date.now();
     if (now - lastFunnelSubmitTime < FUNNEL_SUBMIT_COOLDOWN_MS) {
         alert('Bitte warten Sie einen Moment, bevor Sie erneut senden.');
         return;
     }
 
-    // === Honeypot check ===
+    // Honeypot — silent abort
     const form = event.target || document.getElementById('leadForm');
     const honeypot = form ? form.querySelector('input[name="_honey"]') : null;
     if (honeypot && honeypot.value.length > 0) {
-        // Silently abort — bot detected
-        showThankYou(); // Fake success to not tip off bots
+        showThankYou();
         return;
     }
 
-    // === Validate and sanitise contact fields ===
+    // Validate contact fields
     const fullName = sanitiseText(document.getElementById('fullName').value, 200);
     const phone = sanitiseText(document.getElementById('phone').value, 50);
     const email = sanitiseText(document.getElementById('email').value, 254);
@@ -192,44 +161,38 @@ function submitLead(event) {
         alert('Bitte geben Sie Ihren vollständigen Namen ein.');
         return;
     }
-
     if (!isValidEmail(email)) {
         alert('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
         return;
     }
-
     if (!isValidPhone(phone)) {
         alert('Bitte geben Sie eine gültige Telefonnummer ein.');
         return;
     }
 
-    // Assign validated data
     quizData.fullName = fullName;
     quizData.phone = phone;
     quizData.email = email;
     quizData.callTime = callTime;
 
-    // Get selected situations (checkboxes)
     const situationCheckboxes = document.querySelectorAll('input[name="situation"]:checked');
     quizData.situation = Array.from(situationCheckboxes).map(function (cb) {
         return sanitiseText(cb.value, 100);
     });
 
-    // === UI: Show loading ===
+    // UI: loading state
     const submitBtn = document.getElementById('submitBtn');
     const submitText = document.getElementById('submitText');
     const submitLoader = document.getElementById('submitLoader');
-
     if (submitBtn) submitBtn.disabled = true;
     if (submitText) submitText.classList.add('hidden');
     if (submitLoader) submitLoader.classList.remove('hidden');
 
-    // === Populate hidden fields with safe, escaped values ===
-    const setHidden = function (id, val) {
-        const el = document.getElementById(id);
+    // Populate hidden fields with escaped values
+    var setHidden = function (id, val) {
+        var el = document.getElementById(id);
         if (el) el.value = escapeHTML(String(val));
     };
-
     setHidden('hiddenPropertyType', quizData.propertyType);
     setHidden('hiddenCondition', quizData.condition);
     setHidden('hiddenSituation', quizData.situation.join(', '));
@@ -238,127 +201,85 @@ function submitLead(event) {
 
     lastFunnelSubmitTime = now;
 
-    if (MAILCHIMP_ACTION_URL) {
-        // Create hidden form for Mailchimp
-        const mcForm = document.createElement('form');
-        mcForm.action = MAILCHIMP_ACTION_URL;
-        mcForm.method = 'POST';
-        mcForm.target = '_blank';
-        mcForm.style.display = 'none';
-
-        const fields = {
-            'EMAIL': quizData.email,
-            'FNAME': quizData.fullName,
-            'PHONE': quizData.phone,
-            'MMERGE3': quizData.propertyType,
-            'MMERGE4': quizData.condition,
-            'MMERGE5': quizData.timeline,
-            'MMERGE6': quizData.street,
-            'MMERGE7': quizData.city,
-            'MMERGE10': quizData.situation.join(', ')
-        };
-
-        Object.entries(fields).forEach(function (entry) {
-            if (entry[1]) {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = entry[0];
-                // Safe: these go into a server POST body, not the DOM
-                input.value = entry[1];
-                mcForm.appendChild(input);
-            }
-        });
-
-        document.body.appendChild(mcForm);
-        mcForm.submit();
-
-        setTimeout(function () {
-            if (submitBtn) submitBtn.disabled = false;
-            if (submitText) submitText.classList.remove('hidden');
-            if (submitLoader) submitLoader.classList.add('hidden');
-            showThankYou();
-        }, 1000);
-
+    // Submit via FormSubmit.co (form action set in HTML/DOMContentLoaded)
+    if (form) {
+        // Allow a brief moment for UI update before native submit
+        setTimeout(function () { form.submit(); }, 400);
     } else {
-        // Fallback demo — replace with your submission endpoint in production
-        setTimeout(function () {
-            if (submitBtn) submitBtn.disabled = false;
-            if (submitText) submitText.classList.remove('hidden');
-            if (submitLoader) submitLoader.classList.add('hidden');
-            showThankYou();
-        }, 1500);
+        showThankYou();
     }
 }
 
-// Show Thank You Step — use textContent (NOT innerHTML) to avoid XSS
+// ===== Thank You Step — textContent only (XSS safe) =====
 function showThankYou() {
-    const nameEl = document.getElementById('thankYouName');
-    const addrEl = document.getElementById('thankYouAddress');
-    const phoneEl = document.getElementById('thankYouPhone');
-    const emailEl = document.getElementById('thankYouEmail');
+    var n = document.getElementById('thankYouName');
+    var a = document.getElementById('thankYouAddress');
+    var p = document.getElementById('thankYouPhone');
+    var em = document.getElementById('thankYouEmail');
 
-    // Safe: .textContent never interprets HTML
-    if (nameEl) nameEl.textContent = quizData.fullName.split(' ')[0] || 'Kunde';
-    if (addrEl) addrEl.textContent = quizData.street + ', ' + quizData.city;
-    if (phoneEl) phoneEl.textContent = '0123 456 789';
-    if (emailEl) emailEl.textContent = quizData.email;
+    if (n) n.textContent = quizData.fullName.split(' ')[0] || 'Kunde';
+    if (a) a.textContent = quizData.street + ', ' + quizData.city;
+    if (p) p.textContent = quizData.phone || '—';
+    if (em) em.textContent = quizData.email;
 
     goToStep(7);
 
-    // Conversion tracking
     if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
-            send_to: 'AW-XXXXXXXXX/XXXXXXXXX',
-            value: 1.0,
-            currency: 'EUR'
-        });
+        gtag('event', 'conversion', { send_to: 'AW-XXXXXXXXX/XXXXXXXXX', value: 1.0, currency: 'EUR' });
     }
-
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead');
-    }
+    if (typeof fbq !== 'undefined') { fbq('track', 'Lead'); }
 }
 
-// Close modal when clicking outside
-document.addEventListener('click', function (event) {
-    const modal = document.getElementById('quizModal');
-    if (modal && event.target === modal) {
-        closeQuiz();
-    }
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', function (event) {
-    const modal = document.getElementById('quizModal');
-    if (modal && modal.classList.contains('active') && event.key === 'Escape') {
-        closeQuiz();
-    }
-});
-
-// Initialize on page load
+// ===== Full Funnel Form (bewertung.html) =====
 document.addEventListener('DOMContentLoaded', function () {
-    // Smooth scroll for anchor links — with safe selector validation
+    var fullFunnelForm = document.getElementById('fullFunnelForm');
+    if (fullFunnelForm) {
+        fullFunnelForm.action = 'https://formsubmit.co/mehmet.oezyildirim2@hotmail.com';
+        fullFunnelForm.method = 'POST';
+
+        fullFunnelForm.addEventListener('submit', function (e) {
+            var now = Date.now();
+            if (now - lastFunnelSubmitTime < FUNNEL_SUBMIT_COOLDOWN_MS) {
+                e.preventDefault();
+                alert('Bitte warten Sie einen Moment.');
+                return;
+            }
+            var honeypot = fullFunnelForm.querySelector('input[name="_honey"]');
+            if (honeypot && honeypot.value.length > 0) {
+                e.preventDefault();
+                return;
+            }
+            var btn = document.getElementById('finalSubmitBtn');
+            if (btn) { btn.disabled = true; btn.textContent = 'Wird gesendet...'; }
+            lastFunnelSubmitTime = now;
+        });
+    }
+});
+
+// ===== Modal: outside click & Escape key =====
+document.addEventListener('click', function (event) {
+    var modal = document.getElementById('quizModal');
+    if (modal && event.target === modal) { closeQuiz(); }
+});
+document.addEventListener('keydown', function (event) {
+    var modal = document.getElementById('quizModal');
+    if (modal && modal.classList.contains('active') && event.key === 'Escape') { closeQuiz(); }
+});
+
+// ===== Init =====
+document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const href = this.getAttribute('href');
+            var href = this.getAttribute('href');
             if (!href || !/^#[a-zA-Z0-9_-]+$/.test(href)) return;
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            var target = document.querySelector(href);
+            if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         });
     });
 
-    // Analytics
     if (typeof gtag !== 'undefined') {
-        gtag('config', 'GA_MEASUREMENT_ID', {
-            page_title: document.title,
-            page_path: window.location.pathname
-        });
+        gtag('config', 'GA_MEASUREMENT_ID', { page_title: document.title, page_path: window.location.pathname });
     }
-
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'PageView');
-    }
+    if (typeof fbq !== 'undefined') { fbq('track', 'PageView'); }
 });
