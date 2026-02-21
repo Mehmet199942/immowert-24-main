@@ -80,7 +80,6 @@ body {
     padding: 0.28rem 0.6rem;
     border-radius: 1px;
     background: transparent;
-    filter: brightness(0) invert(1);
 }
 
 /* Nav: flows right of logo, like Blackstone */
