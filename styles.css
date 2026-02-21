@@ -55,7 +55,7 @@ body {
     height: 9rem;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 3.5rem;
+    padding: 2rem 3.5rem 0;
     gap: 0;
 }
 
@@ -76,7 +76,7 @@ body {
     height: 4.75rem;
     width: auto;
     display: block;
-    border: 1px solid rgba(255, 255, 255, 0.75);
+    border: 1px solid #ffffff;
     padding: 0.75rem 1.4rem;
     border-radius: 1px;
     background: transparent;
@@ -94,7 +94,7 @@ body {
 
 .nav a {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.80);
+    color: #ffffff;
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0.01em;
@@ -111,7 +111,7 @@ body {
     left: 0;
     width: 0;
     height: 1px;
-    background: rgba(255, 255, 255, 0.9);
+    background: #ffffff;
     transition: width 0.25s ease;
 }
 
@@ -128,7 +128,7 @@ body {
     background: transparent;
     color: #ffffff;
     padding: 0.75rem 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.55);
+    border: 1px solid #ffffff;
     border-radius: 2px;
     font-size: 1rem;
     font-weight: 400;
