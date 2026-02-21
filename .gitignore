@@ -1,0 +1,28 @@
+# 🔐 Security — never commit secrets
+*.env
+*.env.*
+.env.local
+.env.development
+.env.production
+*_CREDENTIALS.md
+*credentials*
+*secrets*
+*.key
+*.pem
+*.p12
+*.pfx
+*.secret
+
+# System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.json
+*.swp
+*.swo
+
+# Node (if ever added)
+node_modules/
+npm-debug.log*

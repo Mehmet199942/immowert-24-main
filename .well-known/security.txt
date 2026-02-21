@@ -1,0 +1,11 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+
+Contact: mailto:sicherheit@dr-schwarzimmo.de
+Expires: 2027-02-21T23:00:00.000Z
+Preferred-Languages: de, en
+Canonical: https://dr-schwarzimmo.de/.well-known/security.txt
+Policy: https://dr-schwarzimmo.de/sicherheit.html
+
+# We take security seriously. If you discover a vulnerability,
+# please report it responsibly to the contact above.
+# We aim to respond within 72 hours and appreciate responsible disclosure.

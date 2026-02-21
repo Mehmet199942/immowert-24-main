@@ -1,5 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /.well-known/
+
+# Block common attack probes
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /xmlrpc.php
+Disallow: /.git/
+Disallow: /_headers
 
 # Sitemap
-Sitemap: https://YOUR_USERNAME.github.io/YOUR_REPO/sitemap.xml
+Sitemap: https://dr-schwarzimmo.de/sitemap.xml

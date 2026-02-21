@@ -7,8 +7,38 @@
     <title>Dr. Schwarz Immobilien - Kostenlose Immobilienbewertung</title>
     <meta name="description"
         content="Erfahren Sie den aktuellen Marktwert Ihrer Immobilie – präzise, schnell und völlig kostenfrei. Professionelle Bewertung in nur 2 Minuten.">
+
+    <!-- Security: Referrer Policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Security: Content Security Policy -->
+    <!-- Allowlist: self, Google Fonts, FormSubmit backend, Unsplash CDN, Wikimedia -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com https://upload.wikimedia.org data:; form-action https://formsubmit.co; frame-ancestors 'none'; connect-src 'self'; object-src 'none'; base-uri 'self';">
+
+    <!-- Security: Clickjacking protection (meta fallback — real protection needs server headers) -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
+    <!-- Performance: Mobile theme color -->
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Performance: DNS prefetch for third-party origins -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://upload.wikimedia.org">
+    <link rel="dns-prefetch" href="https://formsubmit.co">
+
+    <!-- Performance: Preconnect to font origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Performance: Preload hero (LCP) image for fastest render -->
+    <link rel="preload" as="image"
+        href="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&auto=format&fit=crop"
+        fetchpriority="high">
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -115,9 +145,10 @@
                     <input type="hidden" name="zip" id="hiddenZip">
                     <input type="hidden" name="_subject" value="Neue Immobilienbewertung - Dr. Schwarz Immobilien">
                     <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://mehmet199942.github.io/immowert-24/danke.html">
-                    <input type="text" name="_honey" style="display:none">
+                    <!-- Security: Keep captcha enabled — remove _captcha=false to allow FormSubmit bot protection -->
+                    <input type="hidden" name="_next" value="https://dr-schwarzimmo.de/danke.html">
+                    <!-- Security: Honeypot field — hidden via CSS class, not inline style (avoids CSP violation) -->
+                    <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off">
 
                     <button type="submit" class="btn-primary" id="submitBtn">
                         <span id="submitText">Kostenlose Bewertung anfordern</span>
@@ -132,7 +163,8 @@
     <header class="header" style="position:relative;">
         <div class="container header-content">
             <div class="logo">
-                <img src="logo.png" alt="Dr. Schwarz Immobilien" class="logo-img">
+                <img src="logo.png" alt="Dr. Schwarz Immobilien" class="logo-img" width="200" height="76"
+                    loading="eager">
             </div>
             <nav class="nav">
                 <a href="#bewertung">Bewertung starten</a>
@@ -178,8 +210,10 @@
                     </div>
                 </div>
                 <div class="hero-image-wide">
+                    <!-- Performance: LCP image — eager load, high fetch priority, explicit dimensions prevent CLS -->
                     <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&auto=format&fit=crop"
-                        alt="Traumhaus">
+                        alt="Modernes Haus — Dr. Schwarz Immobilien" width="1000" height="429" loading="eager"
+                        fetchpriority="high" referrerpolicy="no-referrer">
                 </div>
             </div>
         </div>
@@ -190,12 +224,15 @@
         <div class="container trust-content">
             <p class="trust-label">BEKANNT AUS</p>
             <div class="trust-logos">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Welt_TV_Logo_2016.svg" alt="WELT">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Frankfurter_Allgemeine_logo.svg"
-                    alt="FAZ">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Handelsblatt_logo.svg" alt="Handelsblatt">
+                <!-- Performance: logos are below fold — lazy load. Explicit dimensions prevent CLS. -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Welt_TV_Logo_2016.svg" alt="WELT"
+                    width="80" height="32" loading="lazy" referrerpolicy="no-referrer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Frankfurter_Allgemeine_logo.svg" alt="FAZ"
+                    width="120" height="32" loading="lazy" referrerpolicy="no-referrer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Handelsblatt_logo.svg" alt="Handelsblatt"
+                    width="140" height="32" loading="lazy" referrerpolicy="no-referrer">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/ImmobilienScout24_logo.svg"
-                    alt="ImmoScout24">
+                    alt="ImmoScout24" width="140" height="32" loading="lazy" referrerpolicy="no-referrer">
             </div>
         </div>
     </section>
@@ -368,7 +405,8 @@
             </div>
         </div>
         <div class="container footer-bottom">
-            <div class="footer-logo"><img src="logo.png" alt="Dr. Schwarz Immobilien" class="footer-logo-img"></div>
+            <div class="footer-logo"><img src="logo.png" alt="Dr. Schwarz Immobilien" class="footer-logo-img" width="80"
+                    height="32" loading="lazy"></div>
             <p class="footer-copyright">© 2026 Dr. Schwarz Immobilien. Alle Rechte vorbehalten.</p>
         </div>
     </footer>

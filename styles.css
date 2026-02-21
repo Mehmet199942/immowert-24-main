@@ -947,3 +947,44 @@ body {
 .btn-secondary:hover {
     background: #D2D2D7;
 }
+
+/* ===== Security: Honeypot field — must be hidden without inline style ===== */
+/* CSP with style-src 'self' blocks inline style attrs, so we use a class */
+.honeypot {
+    display: none !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* ===== Accessibility: Keyboard focus visibility ===== */
+/* Replaces default browser outlines with a consistent, visible focus ring */
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* ===== Performance: Rendering deferral for off-screen sections ===== */
+/* content-visibility: auto tells the browser to skip rendering work for
+   sections not yet in the viewport, improving LCP and TTI. */
+.stats-section,
+.how-it-works,
+.benefits-section,
+.trust-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 400px;
+    /* Reserve estimated space to prevent CLS */
+}
+
+/* ===== Performance: Prevent FOIC (flash of invisible content) ===== */
+/* Ensures images never overflow their containers */
+img {
+    max-width: 100%;
+    height: auto;
+}

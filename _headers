@@ -1,0 +1,15 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+  Cross-Origin-Embedder-Policy: unsafe-none
+
+# NOTE: GitHub Pages does NOT process this file.
+# To enforce these headers in production, configure them in:
+# - Cloudflare (Dashboard → Rules → Transform Rules → Response Headers)
+# - Or migrate hosting to Netlify/Vercel which support _headers natively
+# HSTS must be set at the CDN/server level — cannot be done via meta tag.
+# Recommended Cloudflare HSTS: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
