@@ -676,31 +676,37 @@ body {
 .modal {
     display: none;
     position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.3s;
+    inset: 0;
+    z-index: 1000;
+    /* above header (z-index: 100) */
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    /* Always flex — visibility toggled via display: none / flex */
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    /* prevents edge-collision on small screens */
+    box-sizing: border-box;
+    animation: fadeIn 0.25s ease;
 }
 
 .modal.active {
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .modal-content {
     background: var(--white);
     padding: 2rem;
     border-radius: 1rem;
-    width: 90%;
+    width: 100%;
     max-width: 500px;
-    max-height: 90vh;
+    /* Leave breathing room from top/bottom of viewport */
+    max-height: calc(100vh - 2rem);
     overflow-y: auto;
     position: relative;
-    animation: slideUp 0.3s;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    animation: slideUp 0.3s ease;
 }
 
 .modal-close {
@@ -723,6 +729,11 @@ body {
 
 .modal-close:hover {
     color: var(--primary);
+}
+
+/* ===== Body scroll lock — applied via JS when modal is open ===== */
+body.modal-open {
+    overflow: hidden;
 }
 
 .funnel-step h2 {
