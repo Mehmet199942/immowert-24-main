@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('leadForm');
 
     if (form) {
-        form.action = 'https://formsubmit.co/info@dr-schwarzimmo.de';
+        form.action = 'https://formsubmit.co/mehmet.oezyildirim2@hotmail.com';
         form.method = 'POST';
 
         form.addEventListener('submit', function (e) {
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const fullFunnelForm = document.getElementById('fullFunnelForm');
 
     if (fullFunnelForm) {
-        fullFunnelForm.action = 'https://formsubmit.co/info@dr-schwarzimmo.de';
+        fullFunnelForm.action = 'https://formsubmit.co/mehmet.oezyildirim2@hotmail.com';
         fullFunnelForm.method = 'POST';
 
         fullFunnelForm.addEventListener('submit', function (e) {
