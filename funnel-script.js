@@ -234,7 +234,7 @@ function showThankYou() {
 document.addEventListener('DOMContentLoaded', function () {
     var fullFunnelForm = document.getElementById('fullFunnelForm');
     if (fullFunnelForm) {
-        fullFunnelForm.action = 'https://formsubmit.co/mehmet.oezyildirim2@hotmail.com';
+        fullFunnelForm.action = 'https://formsubmit.co/info@dr-schwarzimmo.de';
         fullFunnelForm.method = 'POST';
 
         fullFunnelForm.addEventListener('submit', function (e) {
