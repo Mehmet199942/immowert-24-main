@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wohnung direkt verkaufen – In 14 Tagen Geld erhalten | Dr. Schwarz Immobilien</title>
+    <meta name="description"
+        content="Wir kaufen Ihre Wohnung direkt – ohne Makler, ohne Besichtigungsstress, ohne lange Wartezeiten. Angebot in 48 Stunden, Kaufpreis in 14 Tagen auf Ihrem Konto.">
+
+    <!-- Security: Referrer Policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Performance: Mobile theme color -->
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Performance: DNS prefetch -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://upload.wikimedia.org">
+    <link rel="dns-prefetch" href="https://formsubmit.co">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="landing.css?v=2">
+    <!-- Override landing.css font to match index.html -->
+    <style>
+        body {
+            font-family: 'Inter', "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== LEAD FUNNEL MODAL ===== -->
+    <div id="funnelModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeFunnel()">&times;</button>
+
+            <!-- Step 1: Property Type -->
+            <div class="funnel-step" id="step1">
+                <h2>Welche Art von Immobilie möchten Sie verkaufen?</h2>
+                <div class="property-types">
+                    <button class="property-btn" onclick="selectProperty('Wohnung')">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
+                        </svg>
+                        <span>Wohnung</span>
+                    </button>
+                    <button class="property-btn" onclick="selectProperty('Haus')">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                        <span>Haus</span>
+                    </button>
+                    <button class="property-btn" onclick="selectProperty('Grundstück')">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7">
+                            </path>
+                        </svg>
+                        <span>Grundstück</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Property Details -->
+            <div class="funnel-step hidden" id="step2">
+                <button class="back-btn" onclick="goToStep(1)">← Zurück</button>
+                <h2>Details zu Ihrer Wohnung</h2>
+                <form class="funnel-form">
+                    <div class="form-group">
+                        <label>Wohnfläche (m²)</label>
+                        <input type="number" id="area" required min="1" placeholder="z.B. 75">
+                    </div>
+                    <div class="form-group">
+                        <label>Anzahl Zimmer</label>
+                        <input type="number" id="rooms" required min="1" placeholder="z.B. 3">
+                    </div>
+                    <div class="form-group">
+                        <label>Baujahr</label>
+                        <input type="number" id="year" required min="1800" max="2026" placeholder="z.B. 1998">
+                    </div>
+                    <button type="button" class="btn-primary" onclick="validateStep2()">Weiter</button>
+                </form>
+            </div>
+
+            <!-- Step 3: Location -->
+            <div class="funnel-step hidden" id="step3">
+                <button class="back-btn" onclick="goToStep(2)">← Zurück</button>
+                <h2>Wo befindet sich Ihre Wohnung?</h2>
+                <form class="funnel-form">
+                    <div class="form-group">
+                        <label>Postleitzahl</label>
+                        <input type="text" id="zip" required pattern="[0-9]{5}" placeholder="z.B. 10115">
+                    </div>
+                    <button type="button" class="btn-primary" onclick="validateStep3()">Weiter</button>
+                </form>
+            </div>
+
+            <!-- Step 4: Contact -->
+            <div class="funnel-step hidden" id="step4">
+                <button class="back-btn" onclick="goToStep(3)">← Zurück</button>
+                <h2>Wie können wir Sie erreichen?</h2>
+                <form id="leadForm" class="funnel-form" action="https://formsubmit.co/info@dr-schwarzimmo.de"
+                    method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Vorname</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nachname</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>E-Mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <!-- Hidden fields -->
+                    <input type="hidden" name="propertyType" id="hiddenPropertyType">
+                    <input type="hidden" name="area" id="hiddenArea">
+                    <input type="hidden" name="rooms" id="hiddenRooms">
+                    <input type="hidden" name="year" id="hiddenYear">
+                    <input type="hidden" name="zip" id="hiddenZip">
+                    <input type="hidden" name="_subject" value="Wohnungsverkauf Direktanfrage – Dr. Schwarz Immobilien">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" value="https://dr-schwarzimmo.de/danke.html">
+                    <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off">
+
+                    <button type="submit" class="btn-primary" id="submitBtn">
+                        <span id="submitText">Kostenloses Angebot anfordern</span>
+                        <span id="submitLoader" class="hidden">Wird gesendet...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER (matches index.html) ===== -->
+    <header class="header" style="position:relative;">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo.png" alt="Dr. Schwarz Immobilien" class="logo-img" width="200" height="76"
+                    loading="eager">
+            </div>
+            <nav class="nav">
+                <a href="#direktkauf">Direktkauf</a>
+                <a href="#ablauf">So läuft es ab</a>
+                <a href="#vorteile">Ihre Vorteile</a>
+                <a href="#bewertungen">Kundenstimmen</a>
+            </nav>
+            <button class="btn-header" onclick="openFunnel()">Angebot anfordern</button>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="lp-hero" id="direktkauf">
+        <div class="lp-container">
+            <div class="lp-hero-inner" style="display: flex; flex-direction: column; width: 100%; align-items: center;">
+                <div class="lp-hero-text"
+                    style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <div class="lp-tag">DR. SCHWARZ IMMOBILIEN – IHR DIREKTKÄUFER FÜR WOHNUNGEN IN DEUTSCHLAND</div>
+                    <h1>
+                        Wohnung direkt verkaufen.<br>
+                        <span class="lp-accent">In 14 Tagen Geld erhalten.</span><br>
+                        <span class="lp-accent">Ohne Makler.</span>
+                    </h1>
+                    <p class="lp-hero-sub">
+                        Wir kaufen Ihre Wohnung <strong>direkt und ohne Umwege</strong> – kein Makler, keine
+                        Besichtigungen, kein monatelanger Stress. Sie erhalten ein verbindliches Angebot
+                        innerhalb von <strong>48 Stunden</strong> und den Kaufpreis in <strong>14 Tagen</strong>
+                        auf Ihrem Konto.
+                    </p>
+                    <p class="lp-hero-urgency"
+                        style="color: #b91c1c; font-weight: 500; font-size: 0.95rem; margin-bottom: 2rem;">
+                        ➜ Wir kaufen derzeit aktiv in vielen Regionen ein — sichern Sie sich jetzt ein Angebot.
+                    </p>
+                    <div class="lp-trust-row" style="justify-content: center;">
+                        <div class="lp-stars">★★★★★</div>
+                        <span>4,9 / 5 Kundenbewertungen</span>
+                        <span class="lp-sep">·</span>
+                        <span>✓ TÜV geprüft</span>
+                        <span class="lp-sep">·</span>
+                        <span>✓ 0 € Maklerprovision</span>
+                    </div>
+                </div>
+
+                <!-- CTA Cards -->
+                <div class="lp-hero-cards">
+                    <!-- Card 1: Recommended -->
+                    <div class="lp-cta-card lp-cta-card--recommended">
+                        <div class="lp-cta-card-badge">Empfohlen</div>
+                        <div class="lp-cta-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3>Direktes Kaufangebot</h3>
+                        <ul class="lp-cta-list">
+                            <li>✓ Verbindliches Angebot in 48 Stunden</li>
+                            <li>✓ Kaufpreis in 14 Tagen auf dem Konto</li>
+                            <li>✓ Kein Makler – keine Provision</li>
+                        </ul>
+                        <button class="lp-btn-primary-full" onclick="openFunnel()">Jetzt Angebot anfordern →</button>
+                    </div>
+
+                    <!-- Card 2: Consultation -->
+                    <div class="lp-cta-card lp-cta-card--fast">
+                        <div class="lp-cta-card-icon lp-cta-card-icon--light">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                        </div>
+                        <div class="lp-cta-card-label">kostenlos</div>
+                        <h3>Persönliche Beratung</h3>
+                        <ul class="lp-cta-list">
+                            <li>✓ Unverbindliches Erstgespräch</li>
+                            <li>✓ Individuelle Einschätzung Ihrer Wohnung</li>
+                            <li>✓ Alle Fragen direkt beantwortet</li>
+                        </ul>
+                        <a href="kontakt.html" class="lp-btn-outline-full">Beratungsgespräch vereinbaren →</a>
+                    </div>
+                </div>
+                <!-- Hero Image -->
+                <div class="lp-hero-image"
+                    style="margin-top: 4rem; width: 100%; max-width: 1000px; border-radius: 1rem; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1000&auto=format&fit=crop"
+                        alt="Moderne Wohnung – Dr. Schwarz Immobilien"
+                        style="width: 100%; height: auto; display: block;" loading="eager" fetchpriority="high">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRESS / BEKANNT AUS ===== -->
+    <section class="lp-press">
+        <div class="lp-container lp-press-inner">
+            <p class="lp-press-label">BEKANNT AUS</p>
+            <div class="lp-press-logos">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Welt_TV_Logo_2016.svg" alt="WELT"
+                    loading="lazy" referrerpolicy="no-referrer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Frankfurter_Allgemeine_logo.svg" alt="FAZ"
+                    loading="lazy" referrerpolicy="no-referrer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Handelsblatt_logo.svg" alt="Handelsblatt"
+                    loading="lazy" referrerpolicy="no-referrer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/ImmobilienScout24_logo.svg"
+                    alt="ImmoScout24" loading="lazy" referrerpolicy="no-referrer">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PAIN POINTS — WHY DIRECT SALE ===== -->
+    <section class="lp-collab" id="probleme">
+        <div class="lp-container">
+            <div class="lp-section-label">Das Problem mit dem klassischen Verkauf</div>
+            <h2 class="lp-section-title">Warum Wohnungsbesitzer den Direktverkauf wählen</h2>
+
+            <div class="lp-collab-grid">
+                <!-- Pain point card 1 -->
+                <article class="lp-article-card">
+                    <div class="lp-article-meta">
+                        <span class="lp-article-source" style="background: #fee2e2; color: #b91c1c;">Problem</span>
+                        <span class="lp-article-dot">·</span>
+                        <span class="lp-article-date">Klassischer Weg</span>
+                    </div>
+                    <h4>Monatelange Wartezeit beim Maklerverkauf</h4>
+                    <p>Der klassische Wohnungsverkauf dauert im Schnitt 4–9 Monate. Dazu kommen Maklerprovisionen
+                        von bis zu 7 %, aufwendige Exposés, unzählige Besichtigungstermine und unsichere
+                        Finanzierungszusagen.</p>
+                    <a href="#vorteile" class="lp-link">Unsere Alternative entdecken →</a>
+                </article>
+
+                <!-- Pain point card 2 -->
+                <article class="lp-article-card">
+                    <div class="lp-article-meta">
+                        <span class="lp-article-source" style="background: #fee2e2; color: #b91c1c;">Problem</span>
+                        <span class="lp-article-dot">·</span>
+                        <span class="lp-article-date">Klassischer Weg</span>
+                    </div>
+                    <h4>Keine Planungssicherheit – wann kommt das Geld?</h4>
+                    <p>Kaufzusagen platzen, Finanzierungen scheitern in letzter Minute. Viele Verkäufer warten
+                        monatelang auf ihren Kaufpreis – und tragen währenddessen alle laufenden Kosten allein.</p>
+                    <a href="#vorteile" class="lp-link">So machen wir es besser →</a>
+                </article>
+
+                <!-- Testimonial -->
+                <div class="lp-testimonial">
+                    <div class="lp-testimonial-stars">★★★★★</div>
+                    <blockquote>
+                        „Ich wollte die Wohnung meiner Mutter schnell und unkompliziert verkaufen – ohne Makler und ohne
+                        wochenlangen Stress. Das Team von Dr. Schwarz hat mir innerhalb von zwei Tagen ein faires
+                        Angebot gemacht. 14 Tage später war alles erledigt und das Geld auf meinem Konto."
+                    </blockquote>
+                    <div class="lp-testimonial-author">
+                        <div class="lp-testimonial-avatar">K. B.</div>
+                        <div>
+                            <strong>Katharina B.</strong><br>
+                            <small>Wohnungsverkauf nach Erbschaft, Köln</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lp-collab-ctas">
+                <a href="kontakt.html" class="lp-btn-outline">Kostenlos beraten lassen</a>
+                <button class="lp-btn-accent" onclick="openFunnel()">Direktes Angebot anfordern</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS TIMELINE ===== -->
+    <section class="lp-process" id="ablauf">
+        <div class="lp-container">
+            <div class="lp-section-label">Unser 3-Schritte-Prozess</div>
+            <h2 class="lp-section-title">Von der Anfrage zum Geld –<br>in nur 14 Tagen</h2>
+
+            <div class="lp-timeline">
+                <div class="lp-timeline-line"></div>
+
+                <div class="lp-timeline-step">
+                    <div class="lp-timeline-dot">1</div>
+                    <div class="lp-timeline-content">
+                        <h3>Anfrage stellen – kostenlos & unverbindlich</h3>
+                        <p>Füllen Sie unser kurzes Formular aus (dauert 2 Minuten). Wir melden uns innerhalb von
+                            24 Stunden bei Ihnen – für ein kurzes, kostenloses Gespräch über Ihre Wohnung und
+                            Ihre Situation.</p>
+                    </div>
+                </div>
+
+                <div class="lp-timeline-step">
+                    <div class="lp-timeline-dot">2</div>
+                    <div class="lp-timeline-content">
+                        <h3>Verbindliches Kaufangebot in 48 Stunden</h3>
+                        <p>Wir prüfen Ihre Wohnung und unterbreiten Ihnen innerhalb von <strong>48 Stunden</strong>
+                            ein faires, verbindliches Kaufangebot – ohne versteckte Kosten, ohne Provision,
+                            ohne Verpflichtung.</p>
+                    </div>
+                </div>
+
+                <div class="lp-timeline-step">
+                    <div class="lp-timeline-dot">3</div>
+                    <div class="lp-timeline-content">
+                        <h3>Notartermin & Kaufpreis in 14 Tagen</h3>
+                        <p>Sie nehmen das Angebot an – wir kümmern uns um alles Weitere. Notartermin,
+                            Vertragsabwicklung, Schlüsselübergabe. Der Kaufpreis ist spätestens
+                            <strong>14 Tage</strong> nach Vertragsunterzeichnung auf Ihrem Konto.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lp-process-ctas">
+                <a href="kontakt.html" class="lp-btn-outline">Beratungsgespräch vereinbaren</a>
+                <button class="lp-btn-accent" onclick="openFunnel()">Angebot anfordern</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BENEFITS GRID ===== -->
+    <section class="lp-features" id="vorteile">
+        <div class="lp-container">
+            <div class="lp-section-label">Ihre Vorteile</div>
+            <h2 class="lp-section-title">Warum Eigentümer uns vertrauen –<br>und nicht dem Makler</h2>
+
+            <div class="lp-features-grid">
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3>0 € Maklerprovision</h3>
+                    <p>Kein Makler, keine Provision. Sie behalten den vollen Kaufpreis – keine versteckten Abzüge,
+                        keine überraschenden Kosten.</p>
+                </div>
+
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3>Geld in 14 Tagen</h3>
+                    <p>Kein monatelanges Warten auf den richtigen Käufer. Der Kaufpreis landet spätestens
+                        14 Tage nach Vertragsschluss auf Ihrem Konto.</p>
+                </div>
+
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </div>
+                    <h3>Keine Besichtigungen</h3>
+                    <p>Keine fremden Menschen in Ihrer Wohnung, kein Aufräumen, kein Aufhübschen. Wir kaufen
+                        die Wohnung im aktuellen Zustand.</p>
+                </div>
+
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3>100 % Planungssicherheit</h3>
+                    <p>Unser Angebot ist verbindlich. Keine platzenden Finanzierungen, keine letzten
+                        Minuten Überraschungen. Sie wissen genau, wann und wie viel Geld kommt.</p>
+                </div>
+
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                    </div>
+                    <h3>Keine Renovierung nötig</h3>
+                    <p>Ob renovierungsbedürftig, vermietet oder leer – wir kaufen Ihre Wohnung so wie sie ist.
+                        Kein Cent für Renovierungen oder Reparaturen nötig.</p>
+                </div>
+
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h3>Diskret & DSGVO-konform</h3>
+                    <p>Kein öffentliches Inserat, keine neugierigen Nachbarn. Wir handeln vertraulich und
+                        behandeln Ihre persönlichen Daten mit höchster Sorgfalt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="lp-stats">
+        <div class="lp-container lp-stats-grid">
+            <div class="lp-stat">
+                <div class="lp-stat-num" data-target="200">0</div>
+                <div class="lp-stat-unit">+</div>
+                <div class="lp-stat-label">direkt gekaufte Wohnungen</div>
+            </div>
+            <div class="lp-stat">
+                <div class="lp-stat-num" data-target="48">0</div>
+                <div class="lp-stat-unit">h</div>
+                <div class="lp-stat-label">bis zum verbindlichen Angebot</div>
+            </div>
+            <div class="lp-stat">
+                <div class="lp-stat-num" data-target="14">0</div>
+                <div class="lp-stat-unit">T</div>
+                <div class="lp-stat-label">bis Kaufpreis auf dem Konto</div>
+            </div>
+            <div class="lp-stat">
+                <div class="lp-stat-num" data-target="100">0</div>
+                <div class="lp-stat-unit">%</div>
+                <div class="lp-stat-label">Planungssicherheit</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="lp-collab" id="bewertungen">
+        <div class="lp-container">
+            <div class="lp-section-label">Was unsere Verkäufer sagen</div>
+            <h2 class="lp-section-title">Echte Erfahrungen von<br>Wohnungsverkäufern</h2>
+
+            <div class="lp-collab-grid">
+                <!-- Testimonial 1 -->
+                <div class="lp-testimonial">
+                    <div class="lp-testimonial-stars">★★★★★</div>
+                    <blockquote>
+                        „Nach der Scheidung wollte ich die gemeinsame Wohnung so schnell wie möglich verkaufen –
+                        ohne großes Aufsehen. Das Angebot kam nach 36 Stunden, 13 Tage später war alles
+                        abgewickelt. Ich hätte nicht gedacht, dass es so einfach sein kann."
+                    </blockquote>
+                    <div class="lp-testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop"
+                            alt="Marcus H." class="lp-testimonial-avatar" style="object-fit: cover;">
+                        <div>
+                            <strong>Marcus H.</strong><br>
+                            <small>3-Zimmer-Wohnung, Hamburg</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="lp-testimonial">
+                    <div class="lp-testimonial-stars">★★★★★</div>
+                    <blockquote>
+                        „Meine vermietete Wohnung wollte ich loswerden, ohne den Mieter zu stören.
+                        Dr. Schwarz hat alles diskret abgewickelt – kein einziger Besichtigungstermin, kein
+                        Stress. Fairer Preis, schnelle Zahlung. Absolut empfehlenswert."
+                    </blockquote>
+                    <div class="lp-testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1548142813-c348350df52b?q=80&w=150&auto=format&fit=crop"
+                            alt="Sabine R." class="lp-testimonial-avatar" style="object-fit: cover;">
+                        <div>
+                            <strong>Sabine R.</strong><br>
+                            <small>Vermietete Wohnung, München</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="lp-testimonial">
+                    <div class="lp-testimonial-stars">★★★★★</div>
+                    <blockquote>
+                        „Ich musste aus beruflichen Gründen innerhalb von drei Wochen umziehen und konnte
+                        mir kein langes Verkaufsverfahren leisten. Das direkte Angebot war fair, transparent
+                        und der gesamte Ablauf lief reibungslos. Ich würde es jederzeit wieder so machen."
+                    </blockquote>
+                    <div class="lp-testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop"
+                            alt="Thomas L." class="lp-testimonial-avatar" style="object-fit: cover;">
+                        <div>
+                            <strong>Thomas L.</strong><br>
+                            <small>2-Zimmer-Wohnung, Frankfurt</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lp-collab-ctas">
+                <a href="kontakt.html" class="lp-btn-outline">Beratungsgespräch vereinbaren</a>
+                <button class="lp-btn-accent" onclick="openFunnel()">Jetzt Angebot anfordern</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMPARISON ===== -->
+    <section class="lp-features" style="background: var(--lp-surface); border-top: 1px solid rgba(0,0,0,0.1);">
+        <div class="lp-container">
+            <div class="lp-section-label">Der faire Vergleich</div>
+            <h2 class="lp-section-title">Direktverkauf vs. Maklerverkauf</h2>
+
+            <div style="overflow-x: auto; margin-top: 3rem;">
+                <table style="width: 100%; min-width: 600px; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--lp-text);">
+                            <th
+                                style="padding: 1.5rem 1rem; font-size: 1.1rem; font-weight: 700; color: var(--lp-text); width: 33%;">
+                                Merkmal</th>
+                            <th
+                                style="padding: 1.5rem 1rem; font-size: 1.1rem; font-weight: 700; color: var(--lp-accent); width: 33%;">
+                                Dr. Schwarz Direktkauf</th>
+                            <th
+                                style="padding: 1.5rem 1rem; font-size: 1.1rem; font-weight: 700; color: var(--lp-muted); width: 33%;">
+                                Klassischer Makler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <td style="padding: 1.5rem 1rem; font-weight: 600;">Dauer bis zum Verkauf</td>
+                            <td style="padding: 1.5rem 1rem; font-weight: 700; color: var(--lp-text);">14 Tage
+                                garantiert</td>
+                            <td style="padding: 1.5rem 1rem; color: var(--lp-muted);">Meist 4–9 Monate</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <td style="padding: 1.5rem 1rem; font-weight: 600;">Ihre Kosten (Provision)</td>
+                            <td style="padding: 1.5rem 1rem; font-weight: 700; color: var(--lp-text);">0 €</td>
+                            <td style="padding: 1.5rem 1rem; color: var(--lp-muted);">Bis zu 3,57 % vom Kaufpreis</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <td style="padding: 1.5rem 1rem; font-weight: 600;">Besichtigungen</td>
+                            <td style="padding: 1.5rem 1rem; font-weight: 700; color: var(--lp-text);">Keine</td>
+                            <td style="padding: 1.5rem 1rem; color: var(--lp-muted);">Zahlreiche Fremde in der Wohnung
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <td style="padding: 1.5rem 1rem; font-weight: 600;">Planungssicherheit</td>
+                            <td style="padding: 1.5rem 1rem; font-weight: 700; color: var(--lp-text);">100 %
+                                (verbindliches Angebot)</td>
+                            <td style="padding: 1.5rem 1rem; color: var(--lp-muted);">Ungewiss (Käufer kann abspringen)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <td style="padding: 1.5rem 1rem; font-weight: 600;">Renovierung nötig?</td>
+                            <td style="padding: 1.5rem 1rem; font-weight: 700; color: var(--lp-text);">Nein, Kauf wie
+                                gesehen</td>
+                            <td style="padding: 1.5rem 1rem; color: var(--lp-muted);">Oft gefordert für besseren Preis
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="lp-collab-ctas" style="margin-top: 3rem;">
+                <button class="lp-btn-accent" onclick="openFunnel()">Jetzt Direktkauf-Angebot sichern</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="lp-features" style="background: var(--lp-bg);" id="faq">
+        <div class="lp-container">
+            <div class="lp-section-label">Häufige Fragen</div>
+            <h2 class="lp-section-title">Antworten auf Ihre Fragen</h2>
+
+            <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem;">
+                <div
+                    style="background: var(--lp-surface); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--lp-radius); padding: 1.5rem;">
+                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--lp-text);">
+                        Kaufen Sie auch vermietete Wohnungen?</h3>
+                    <p style="color: var(--lp-muted); font-size: 0.95rem;">Ja, wir kaufen Wohnungen in jedem Zustand an
+                        – egal ob bezugsfrei, vermietet oder stark renovierungsbedürftig. Sie müssen dem Mieter nicht
+                        kündigen.</p>
+                </div>
+                <div
+                    style="background: var(--lp-surface); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--lp-radius); padding: 1.5rem;">
+                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--lp-text);">Wie
+                        ermitteln Sie den Kaufpreis?</h3>
+                    <p style="color: var(--lp-muted); font-size: 0.95rem;">Unsere Experten analysieren aktuelle
+                        Marktdaten, Vergleichsobjekte in Ihrer Straße und den Zustand der Wohnung, um Ihnen ein faires,
+                        marktgerechtes Angebot zu unterbreiten.</p>
+                </div>
+                <div
+                    style="background: var(--lp-surface); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--lp-radius); padding: 1.5rem;">
+                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--lp-text);">Ist
+                        das Angebot wirklich zu 100 % kostenlos?</h3>
+                    <p style="color: var(--lp-muted); font-size: 0.95rem;">Ja. Von der ersten Bewertung über das Angebot
+                        bis hin zur Notar-Abwicklung fallen für Sie keinerlei Kosten oder versteckte Gebühren an.</p>
+                </div>
+                <div
+                    style="background: var(--lp-surface); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--lp-radius); padding: 1.5rem;">
+                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--lp-text);">Bin
+                        ich verpflichtet, Ihr Angebot anzunehmen?</h3>
+                    <p style="color: var(--lp-muted); font-size: 0.95rem;">Überhaupt nicht. Unser Kaufangebot ist für
+                        Sie völlig unverbindlich. Sie können in Ruhe entscheiden, ob der direkte Weg für Sie der
+                        richtige ist.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="lp-valuation">
+        <div class="lp-container">
+            <div class="lp-section-label lp-section-label--light">Jetzt starten – kostenlos & unverbindlich</div>
+            <h2 class="lp-section-title lp-section-title--white">Wir kaufen Ihre Wohnung direkt.<br>In 14 Tagen Geld
+                erhalten.</h2>
+            <p class="lp-valuation-sub">Kein Makler. Keine Besichtigungen. Keine Wartezeit.<br>
+                Füllen Sie jetzt das kurze Formular aus und erhalten Sie Ihr persönliches Angebot.</p>
+
+            <div class="lp-val-steps">
+                <div class="lp-val-step">
+                    <div class="lp-val-step-num">1</div>
+                    <div class="lp-val-step-text">Formular ausfüllen</div>
+                </div>
+                <div class="lp-val-arrow">→</div>
+                <div class="lp-val-step">
+                    <div class="lp-val-step-num">2</div>
+                    <div class="lp-val-step-text">Angebot in 48 h</div>
+                </div>
+                <div class="lp-val-arrow">→</div>
+                <div class="lp-val-step">
+                    <div class="lp-val-step-num">3</div>
+                    <div class="lp-val-step-text">Geld in 14 Tagen</div>
+                </div>
+            </div>
+
+            <button class="lp-btn-big" onclick="openFunnel()">Jetzt kostenloses Angebot anfordern →</button>
+            <p class="lp-valuation-note">✓ Kostenlos &nbsp;·&nbsp; ✓ Unverbindlich &nbsp;·&nbsp; ✓ Kein Makler
+                &nbsp;·&nbsp; ✓ In 2 Minuten</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>Über Dr. Schwarz Immobilien</h4>
+                <ul>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="karriere.html">Karriere</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="barrierefreiheit.html">Barrierefreiheit</a></li>
+                    <li><a href="impressum.html">Impressum</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="kontakt.html">Kontakt &amp; Hilfe</a></li>
+                    <li><a href="presseservice.html">Presseservice</a></li>
+                    <li><a href="kuendigung.html">Verträge hier kündigen</a></li>
+                    <li><a href="it-entwicklung.html">IT &amp; Entwicklung</a></li>
+                    <li><a href="preisatlas.html">Preisatlas</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Sicherheit</h4>
+                <ul>
+                    <li><a href="agb.html">AGB &amp; Rechtliche Hinweise</a></li>
+                    <li><a href="verbraucherinformationen.html">Verbraucherinformationen</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                    <li><a href="privacy-manager.html">Zum Privacy-Manager</a></li>
+                    <li><a href="datenschutz-kodex.html">Datenschutz-Kodex</a></li>
+                    <li><a href="sicherheit.html">Sicherheit</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Für Profis</h4>
+                <ul>
+                    <li><a href="produktuebersicht.html">Produktübersicht</a></li>
+                    <li><a href="maklernetzwerk.html">Maklernetzwerk</a></li>
+                    <li><a href="eigentuemeranfragen.html">Eigentümeranfragen</a></li>
+                    <li><a href="finanzierungsanfragen.html">Finanzierungsanfragen</a></li>
+                    <li><a href="umzugsanfragen.html">Umzugsanfragen</a></li>
+                    <li><a href="modernisierungsanfragen.html">Modernisierungsanfragen</a></li>
+                    <li><a href="werben.html">Werben mit uns</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <div class="footer-logo"><img src="logo.png" alt="Dr. Schwarz Immobilien" class="footer-logo-img" width="80"
+                    height="32" loading="lazy"></div>
+            <p class="footer-copyright">© 2026 Dr. Schwarz Immobilien. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+    <script>
+
+        // Animated stat counters
+        function animateCounters() {
+            document.querySelectorAll('.lp-stat-num').forEach(el => {
+                const target = parseInt(el.dataset.target, 10);
+                if (target === 0) return; // skip 0 targets (already 0)
+                const duration = 1800;
+                const step = target / (duration / 16);
+                let current = 0;
+                const timer = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    el.textContent = Math.floor(current);
+                    if (current >= target) clearInterval(timer);
+                }, 16);
+            });
+        }
+
+        const statsSection = document.querySelector('.lp-stats');
+        if (statsSection) {
+            const observer = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
+                    animateCounters();
+                    observer.disconnect();
+                }
+            }, { threshold: 0.3 });
+            observer.observe(statsSection);
+        }
+    </script>
+</body>
+
+</html>
