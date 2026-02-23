@@ -21,7 +21,7 @@
 
 ### Step 2: Set Up Form Submission (10 minutes)
 
-**Option A: FormSubmit.co (Easiest - Free)**
+**Option A: Formspree (Easiest - Free)**
 
 1. Go to https://formsubmit.co
 2. In `cash-offer-funnel.html`, find line with `form.action`
@@ -384,7 +384,7 @@ body {
 **Check:**
 1. Form action URL is correct
 2. All required fields have `required` attribute
-3. Email service (FormSubmit) is configured
+3. Email service (Formspree) is configured
 4. Check browser console for errors
 
 ### Quiz Not Working

@@ -13,7 +13,7 @@ Before deploying, **you MUST configure the email recipient**:
 1. Open `script.js`
 2. Find line 97: `form.action = 'https://formsubmit.co/YOUR_EMAIL@example.com';`
 3. Replace `YOUR_EMAIL@example.com` with your actual email address
-4. **First submission**: FormSubmit.co will send a confirmation email. Click the link to activate.
+4. **First submission**: Formspree will send a confirmation email. Click the link to activate.
 
 ### Step 2: Deploy to GitHub
 
@@ -80,7 +80,7 @@ immowert24-website/
 - ✅ **Multi-step Lead Funnel** - Interactive modal with validation
 - ✅ **Animated Counters** - Scroll-triggered statistics
 - ✅ **Form Validation** - Client-side validation with error messages
-- ✅ **Email Notifications** - Via FormSubmit.co (no backend needed)
+- ✅ **Email Notifications** - Via Formspree (no backend needed)
 - ✅ **Trust Signals** - Company logos and testimonials
 - ✅ **SEO Optimized** - Meta tags and semantic HTML
 - ✅ **Legal Compliance** - Impressum and Datenschutz pages
@@ -95,11 +95,11 @@ immowert24-website/
 
 ## 📧 Form Submission
 
-This site uses [FormSubmit.co](https://formsubmit.co/) - a free form backend service.
+This site uses [Formspree](https://formspree.io/) - a free form backend service.
 
 **How it works:**
 1. User fills out the multi-step funnel
-2. Data is sent to FormSubmit.co
+2. Data is sent to Formspree
 3. You receive an email with all property details
 
 **Features:**
@@ -170,7 +170,7 @@ This project is for your personal/commercial use. Feel free to customize and dep
 ## 🆘 Support
 
 For issues or questions:
-- Check the [FormSubmit.co documentation](https://formsubmit.co/)
+- Check the [Formspree documentation](https://formspree.io/docs/)
 - Review GitHub Pages [documentation](https://docs.github.com/en/pages)
 
 ---
