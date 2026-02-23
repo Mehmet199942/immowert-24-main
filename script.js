@@ -166,6 +166,8 @@ document.addEventListener('DOMContentLoaded', function () {
         form.method = 'POST';
 
         form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Always prevent native HTML post
+
             // === Rate limiting ===
             const now = Date.now();
             if (now - lastSubmitTime < SUBMIT_COOLDOWN_MS) {
@@ -224,12 +226,35 @@ document.addEventListener('DOMContentLoaded', function () {
             const submitText = document.getElementById('submitText');
             const submitLoader = document.getElementById('submitLoader');
 
-            submitBtn.disabled = true;
+            if (submitBtn) submitBtn.disabled = true;
             if (submitText) submitText.classList.add('hidden');
             if (submitLoader) submitLoader.classList.remove('hidden');
 
             lastSubmitTime = now;
-            // Form submits naturally to FormSubmit.co
+
+            // Submit via AJAX to ensure delivery
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        const nextInput = form.querySelector('input[name="_next"]');
+                        window.location.href = (nextInput && nextInput.value) ? nextInput.value : 'https://dr-schwarzimmo.de/danke.html';
+                    } else {
+                        throw new Error('Server returned ' + response.status);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Submission error:', error);
+                    alert('Entschuldigung, es gab einen Fehler beim Senden. Bitte überprüfen Sie Ihre Eingaben oder kontaktieren Sie uns direkt.');
+                    if (submitBtn) submitBtn.disabled = false;
+                    if (submitText) submitText.classList.remove('hidden');
+                    if (submitLoader) submitLoader.classList.add('hidden');
+                });
         });
     }
 });

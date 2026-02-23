@@ -201,10 +201,29 @@ function submitLead(event) {
 
     lastFunnelSubmitTime = now;
 
-    // Submit via FormSubmit.co (form action set in HTML/DOMContentLoaded)
+    // Submit via AJAX (FormSubmit.co)
     if (form) {
-        // Allow a brief moment for UI update before native submit
-        setTimeout(function () { form.submit(); }, 400);
+        fetch(form.action || 'https://formsubmit.co/info@dr-schwarzimmo.de', {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    showThankYou();
+                } else {
+                    throw new Error('Server returned ' + response.status);
+                }
+            })
+            .catch(function (error) {
+                console.error('Submission error:', error);
+                alert('Fehler beim Senden. Bitte überprüfen Sie Ihre Eingaben oder versuchen Sie es später noch einmal.');
+                if (submitBtn) submitBtn.disabled = false;
+                if (submitText) submitText.classList.remove('hidden');
+                if (submitLoader) submitLoader.classList.add('hidden');
+            });
     } else {
         showThankYou();
     }
@@ -238,20 +257,43 @@ document.addEventListener('DOMContentLoaded', function () {
         fullFunnelForm.method = 'POST';
 
         fullFunnelForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent native submit
+
             var now = Date.now();
             if (now - lastFunnelSubmitTime < FUNNEL_SUBMIT_COOLDOWN_MS) {
-                e.preventDefault();
                 alert('Bitte warten Sie einen Moment.');
                 return;
             }
             var honeypot = fullFunnelForm.querySelector('input[name="_honey"]');
             if (honeypot && honeypot.value.length > 0) {
-                e.preventDefault();
-                return;
+                return; // Silent catch
             }
+
             var btn = document.getElementById('finalSubmitBtn');
             if (btn) { btn.disabled = true; btn.textContent = 'Wird gesendet...'; }
             lastFunnelSubmitTime = now;
+
+            // Submit via AJAX
+            fetch(fullFunnelForm.action, {
+                method: 'POST',
+                body: new FormData(fullFunnelForm),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        var nextInput = fullFunnelForm.querySelector('input[name="_next"]');
+                        window.location.href = (nextInput && nextInput.value) ? nextInput.value : 'https://dr-schwarzimmo.de/danke.html';
+                    } else {
+                        throw new Error('Server returned ' + response.status);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Submission error:', error);
+                    alert('Es gab einen Fehler beim Senden. Bitte versuchen Sie es später noch einmal.');
+                    if (btn) { btn.disabled = false; btn.textContent = 'Kostenlos Bewertung anfordern'; }
+                });
         });
     }
 });
