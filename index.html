@@ -14,7 +14,7 @@
     <!-- Security: Content Security Policy -->
     <!-- Allowlist: self, Google Fonts, FormSubmit backend, Unsplash CDN, Wikimedia -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com https://upload.wikimedia.org data:; form-action https://formsubmit.co; frame-ancestors 'none'; connect-src 'self'; object-src 'none'; base-uri 'self';">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com https://upload.wikimedia.org data: https://www.google.com https://www.google.de; form-action https://formsubmit.co; frame-ancestors 'none'; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; object-src 'none'; base-uri 'self';">
 
     <!-- Security: Clickjacking protection (meta fallback — real protection needs server headers) -->
     <meta http-equiv="X-Frame-Options" content="DENY">
@@ -41,6 +41,15 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-652501538"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'AW-652501538');
+    </script>
 </head>
 
 <body>

@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     if (typeof gtag !== 'undefined') {
-        gtag('config', 'GA_MEASUREMENT_ID', { page_title: document.title, page_path: window.location.pathname });
+        gtag('config', 'AW-652501538', { page_title: document.title, page_path: window.location.pathname });
     }
     if (typeof fbq !== 'undefined') { fbq('track', 'PageView'); }
 });
