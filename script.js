@@ -435,3 +435,167 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// ===== Testimonial Slider =====
+document.addEventListener('DOMContentLoaded', function () {
+    const track = document.getElementById('testimonialTrack');
+    const container = document.getElementById('sliderContainer');
+    const dotsContainer = document.getElementById('sliderDots');
+    const prevBtn = document.querySelector('.slider-prev');
+    const nextBtn = document.querySelector('.slider-next');
+
+    if (!track || !container) return;
+
+    const cards = Array.from(track.querySelectorAll('.testimonial-card'));
+    let currentIndex = 0;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID;
+
+    // Calculate how many cards visible
+    function getCardsPerView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 768) return 2;
+        return 1;
+    }
+
+    let cardsPerView = getCardsPerView();
+    let maxIndex = Math.max(0, cards.length - cardsPerView);
+
+    // Initialize Dots
+    function initDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i <= maxIndex; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('slider-dot');
+            dot.setAttribute('aria-label', `Gehe zu Slide ${i + 1}`);
+            if (i === currentIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                cancelAnimationFrame(animationID);
+                goToSlide(i);
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function updateDots() {
+        if (!dotsContainer) return;
+        Array.from(dotsContainer.children).forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    function setPositionByIndex() {
+        if (cards.length === 0) return;
+        // card width includes padding/borders, we add margin horizontally
+        const cardStyle = window.getComputedStyle(cards[0]);
+        const cardWidth = cards[0].offsetWidth + parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
+        currentTranslate = currentIndex * -cardWidth;
+        prevTranslate = currentTranslate;
+        setSliderPosition();
+    }
+
+    function setSliderPosition() {
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function goToSlide(index) {
+        currentIndex = Math.max(0, Math.min(index, maxIndex));
+        updateDots();
+        setPositionByIndex();
+    }
+
+    // Event Listeners for Arrows
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            cancelAnimationFrame(animationID);
+            goToSlide(currentIndex - 1);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            cancelAnimationFrame(animationID);
+            goToSlide(currentIndex + 1);
+        });
+    }
+
+    // Touch / Drag events
+    track.addEventListener('touchstart', touchStart);
+    track.addEventListener('touchend', touchEnd);
+    track.addEventListener('touchmove', touchMove, { passive: true });
+
+    track.addEventListener('mousedown', touchStart);
+    track.addEventListener('mouseup', touchEnd);
+    track.addEventListener('mouseleave', () => {
+        if (isDragging) touchEnd();
+    });
+    track.addEventListener('mousemove', touchMove);
+
+    function getPositionX(event) {
+        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    }
+
+    function touchStart(event) {
+        isDragging = true;
+        startPos = getPositionX(event);
+        animationID = requestAnimationFrame(animation);
+        track.style.transition = 'none';
+
+        // Prevents default behavior (like dragging elements) except for touch events
+        // Don't prevent default on touch so we don't block vertical scrolling unconditionally
+        if (event.type.includes('mouse')) {
+            event.preventDefault();
+        }
+    }
+
+    function touchMove(event) {
+        if (isDragging) {
+            const currentPosition = getPositionX(event);
+            currentTranslate = prevTranslate + currentPosition - startPos;
+        }
+    }
+
+    function touchEnd() {
+        isDragging = false;
+        cancelAnimationFrame(animationID);
+        track.style.transition = 'transform 0.4s ease-in-out';
+
+        const movedBy = currentTranslate - prevTranslate;
+
+        // Threshold for swipe
+        if (movedBy < -100 && currentIndex < maxIndex) currentIndex += 1;
+        else if (movedBy > 100 && currentIndex > 0) currentIndex -= 1;
+
+        goToSlide(currentIndex);
+    }
+
+    function animation() {
+        if (isDragging) {
+            setSliderPosition();
+            requestAnimationFrame(animation);
+        }
+    }
+
+    // Handle Resize
+    window.addEventListener('resize', () => {
+        const newCardsPerView = getCardsPerView();
+        if (newCardsPerView !== cardsPerView) {
+            cardsPerView = newCardsPerView;
+            maxIndex = Math.max(0, cards.length - cardsPerView);
+            // clamp
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            initDots();
+            setPositionByIndex();
+        } else {
+            setPositionByIndex();
+        }
+    });
+
+    // Initialize
+    initDots();
+    setTimeout(setPositionByIndex, 100); // small delay to ensure CSS has loaded widths
+});
