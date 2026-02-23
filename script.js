@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('leadForm');
 
     if (form) {
-        form.action = 'https://formsubmit.co/ajax/a386f88c4cfd0b8655b8a9625c7b6734';
+        form.action = 'https://formspree.io/f/xojnpryw';
         form.method = 'POST';
 
         form.addEventListener('submit', function (e) {
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const fullFunnelForm = document.getElementById('fullFunnelForm');
 
     if (fullFunnelForm) {
-        fullFunnelForm.action = 'https://formsubmit.co/ajax/a386f88c4cfd0b8655b8a9625c7b6734';
+        fullFunnelForm.action = 'https://formspree.io/f/xojnpryw';
         fullFunnelForm.method = 'POST';
 
         fullFunnelForm.addEventListener('submit', function (e) {

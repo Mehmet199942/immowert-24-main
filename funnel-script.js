@@ -203,7 +203,7 @@ function submitLead(event) {
 
     // Submit via AJAX (FormSubmit.co)
     if (form) {
-        fetch(form.action || 'https://formsubmit.co/ajax/a386f88c4cfd0b8655b8a9625c7b6734', {
+        fetch(form.action || 'https://formspree.io/f/xojnpryw', {
             method: 'POST',
             body: new FormData(form),
             headers: {
@@ -253,7 +253,7 @@ function showThankYou() {
 document.addEventListener('DOMContentLoaded', function () {
     var fullFunnelForm = document.getElementById('fullFunnelForm');
     if (fullFunnelForm) {
-        fullFunnelForm.action = 'https://formsubmit.co/ajax/a386f88c4cfd0b8655b8a9625c7b6734';
+        fullFunnelForm.action = 'https://formspree.io/f/xojnpryw';
         fullFunnelForm.method = 'POST';
 
         fullFunnelForm.addEventListener('submit', function (e) {
