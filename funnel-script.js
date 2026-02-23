@@ -203,7 +203,7 @@ function submitLead(event) {
 
     // Submit via AJAX (FormSubmit.co)
     if (form) {
-        fetch(form.action || 'https://formsubmit.co/mehmet.oezyildirim2@hotmail.com', {
+        fetch(form.action || 'https://formsubmit.co/ajax/mehmet.oezyildirim2@hotmail.com', {
             method: 'POST',
             body: new FormData(form),
             headers: {
@@ -253,7 +253,7 @@ function showThankYou() {
 document.addEventListener('DOMContentLoaded', function () {
     var fullFunnelForm = document.getElementById('fullFunnelForm');
     if (fullFunnelForm) {
-        fullFunnelForm.action = 'https://formsubmit.co/mehmet.oezyildirim2@hotmail.com';
+        fullFunnelForm.action = 'https://formsubmit.co/ajax/mehmet.oezyildirim2@hotmail.com';
         fullFunnelForm.method = 'POST';
 
         fullFunnelForm.addEventListener('submit', function (e) {
