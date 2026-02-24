@@ -616,12 +616,12 @@ body {
 
 .lp-testimonial-author strong {
     display: block;
-    color: var(--lp-white);
+    color: var(--lp-text);
     font-size: 0.9rem;
 }
 
 .lp-testimonial-author small {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--lp-muted);
     font-size: 0.78rem;
 }
 
