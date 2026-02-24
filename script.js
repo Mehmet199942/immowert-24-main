@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('leadForm');
 
     if (form) {
-        form.action = 'https://formspree.io/f/xwpgdrnl';
+        form.action = 'https://api.web3forms.com/submit';
         form.method = 'POST';
 
         form.addEventListener('submit', function (e) {
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const fullFunnelForm = document.getElementById('fullFunnelForm');
 
     if (fullFunnelForm) {
-        fullFunnelForm.action = 'https://formspree.io/f/xwpgdrnl';
+        fullFunnelForm.action = 'https://api.web3forms.com/submit';
         fullFunnelForm.method = 'POST';
 
         fullFunnelForm.addEventListener('submit', function (e) {

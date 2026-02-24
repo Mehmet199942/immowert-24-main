@@ -203,7 +203,7 @@ function submitLead(event) {
 
     // Submit via AJAX (FormSubmit.co)
     if (form) {
-        fetch(form.action || 'https://formspree.io/f/xwpgdrnl', {
+        fetch(form.action || 'https://api.web3forms.com/submit', {
             method: 'POST',
             body: new FormData(form),
             headers: {
@@ -253,7 +253,7 @@ function showThankYou() {
 document.addEventListener('DOMContentLoaded', function () {
     var fullFunnelForm = document.getElementById('fullFunnelForm');
     if (fullFunnelForm) {
-        fullFunnelForm.action = 'https://formspree.io/f/xwpgdrnl';
+        fullFunnelForm.action = 'https://api.web3forms.com/submit';
         fullFunnelForm.method = 'POST';
 
         fullFunnelForm.addEventListener('submit', function (e) {
