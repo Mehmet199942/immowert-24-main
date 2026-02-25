@@ -69,6 +69,17 @@ function openFunnel() {
     const modal = document.getElementById('funnelModal');
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    // Track Funnel Open via GTM
+    try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'button_click',
+            'event_category': 'engagement',
+            'event_label': 'Open Funnel Modal'
+        });
+    } catch (err) { }
+
     goToStep(1);
 }
 
@@ -242,6 +253,16 @@ document.addEventListener('DOMContentLoaded', function () {
             })
                 .then(function (response) {
                     if (response.ok) {
+                        // Track Lead Conversion via GTM
+                        try {
+                            window.dataLayer = window.dataLayer || [];
+                            window.dataLayer.push({
+                                'event': 'generate_lead',
+                                'event_category': 'engagement',
+                                'event_label': 'Lead Form Submission'
+                            });
+                        } catch (err) { }
+
                         const nextInput = form.querySelector('input[name="_next"]');
                         window.location.href = (nextInput && nextInput.value) ? nextInput.value : 'https://dr-schwarzimmo.de/danke.html';
                     } else {
@@ -457,6 +478,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 btn.textContent = 'Wird gesendet...';
             }
             lastSubmitTime = now;
+
+            // Track Full Funnel Lead Conversion via GTM
+            try {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'generate_lead',
+                    'event_category': 'engagement',
+                    'event_label': 'Full Funnel Submission'
+                });
+            } catch (err) { }
         });
     }
 });
