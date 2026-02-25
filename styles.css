@@ -154,11 +154,26 @@ body {
 
 @media (max-width: 767px) {
     .header-content {
-        padding: 0 1.5rem;
+        padding: 1rem 1rem 0;
+        height: 5.5rem;
+    }
+
+    .logo-img {
+        height: 3.25rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .btn-header {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
     }
 
     .nav {
         display: none;
+    }
+
+    .hero-title {
+        font-size: 2rem;
     }
 }
 
