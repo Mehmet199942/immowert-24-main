@@ -1,8 +1,7 @@
 Add-Type -AssemblyName System.Drawing
 
-$sourceImagePath = "c:\Users\mehme\Desktop\immowert-24-main-main\logo.png"
+$sourceImagePath = "C:\Users\mehme\.gemini\antigravity\brain\71b45136-6d6c-444c-b26b-873a02103c43\media__1772199480652.png"
 
-# Setup high quality graphics
 function Create-SquareImage ($targetPath, $targetSize) {
     if (-not (Test-Path $sourceImagePath)) {
         Write-Host "Source image not found!"
@@ -33,7 +32,7 @@ function Create-SquareImage ($targetPath, $targetSize) {
     Write-Host "Created $targetPath at ${targetSize}x${targetSize}"
 }
 
+Create-SquareImage "c:\Users\mehme\Desktop\immowert-24-main-main\favicon.png" 512
 Create-SquareImage "c:\Users\mehme\Desktop\immowert-24-main-main\favicon-192.png" 192
 Create-SquareImage "c:\Users\mehme\Desktop\immowert-24-main-main\apple-touch-icon.png" 180
 
-# Also make an standard 32x32 favicon.ico by just renaming a png (browsers support png as ico) but better yet, just link to png
